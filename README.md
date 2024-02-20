@@ -130,6 +130,7 @@ consistently promoted across all datasets and forecasting lengths.
 <p align="center">
 <img src="./figures/ablation.png" alt="" align=center />
 </p>
+
 ## Showcases
 
 <p align="center">
