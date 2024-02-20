@@ -120,6 +120,7 @@ improving with the more available lookback observations, which is highly desired
 <p align="center">
 <img src="./figures/lookback.png" alt="" height = "350" align=center />
 </p>
+
 ## Prompting Ablation
 
 We conduct the ablation on ou Token-wise Prompting by integrating timestamps. The forecasting performance is
