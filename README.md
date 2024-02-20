@@ -80,7 +80,7 @@ bash ./scripts/method_generality/opt.sh
 
 ## Zero-shot Forecasting
 
-we evaluate the performance under the zero-shot scenario, where the forecaster is first trained on a source domain and then directly evaluated on the unseen target domain.
+We evaluate the performance under the zero-shot scenario, where the forecaster is first trained on a source domain and then directly evaluated on the unseen target domain.
 
 <p align="center">
 <img src="./figures/zeroshot_results.png" alt="" align=center />
@@ -88,7 +88,7 @@ we evaluate the performance under the zero-shot scenario, where the forecaster i
 
 ## In-context Forecasting
 
-AutoTimes can utilize the instructions or demonstrations of time series. Consequently, we propose in-context forecasting. Based on the zero-shot forecasting scenario, we uniformly select the first time series from the target domain as the demonstration and adopt it as the prompt. The composed “time series sentence” is fed into our forecaster for the prediction of the lookback window.
+AutoTimes can utilize the instructions in time series, where we propose in-context forecasting. Based on the zero-shot forecasting scenario, we uniformly select forecasting demonstration from the target domain and adopt it as the prompt. The composed “time series sentence” is fed into our forecaster for the prediction of the lookback window.
 
 <p align="center">
 <img src="./figures/in-context.png" alt="" align=center />
@@ -107,7 +107,7 @@ AutoTimes demonstrates competitive performance in long-term and short-term scena
 
 ## Model Generality
 
-We evaluate the efficiency of each repurposed LLM from three perspectives: forecasting performance, training speed, and parameters, which demonstrates better performance with the increase of parameters validating the scaling law.
+We evaluate the efficiency of each repurposed LLM from three perspectives: forecasting performance, training speed, and parameters, demonstrating improved performance with the increase of parameters that validates the scaling law.
 
 <p align="center">
 <img src="./figures/llms.png" alt="" height = "390" align=center />
@@ -132,6 +132,8 @@ consistently promoted across all datasets and forecasting lengths.
 </p>
 
 ## Showcases
+
+We provide several showcases showing the zero-shot and in-context forecasting results.
 
 <p align="center">
 <img src="./figures/showcases.png" alt="" align=center />
