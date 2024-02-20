@@ -2,41 +2,41 @@
 
 The repo is the official implementation for the paper: [AutoTimes: Autoregressive Time Series Forecasters via Large Language Models](https://arxiv.org/abs/2402.02370). It currently includes code implementations for the following tasks:
 
-> **[Time Series Forecasting](./scripts/multivariate_forecasting/)**: We provide all scripts as well as datasets for the reproduction of forecasting results in this repo.
+> **[Time Series Forecasting](./scripts/multivariate_forecasting/)**: We repurpose large language models as out-of-box time series forecasters on benchmarks including long-term and short-term forecasting.
 
-> **[Zero-shot Forecasting](./scripts/zeroshot_forecasting/)**:  AutoTimes framework can consistently promote Transformer variants, and take advantage of the booming efficient attention mechanisms.
+> **[Zero-shot Forecasting](./scripts/zeroshot_forecasting/)**: Large models exhibiting remarkable zero-shot capability are beneficial for data-scarce applications, where AutoTimes takes advantage of this and demonstrates good performance on scenarios without training samples.
 
-> **[In-context Forecasting](./scripts/in-context_forecasting/)**:  AutoTimes framework can consistently promote Transformer variants, and take advantage of the booming efficient attention mechanisms.
+> **[In-context Forecasting](./scripts/in-context_forecasting/)**: We propose in-context forecasting in this paper, where instructions in time series itself are available to further enhance forecasting.
 
-> **[Generality on Large Language Models](scripts/llm_generality)**: AutoTimes is demonstrated to generalize well on unseen time series, making it a nice alternative as the fundamental backbone of the large time series model.
+> **[Generality on Large Language Models](scripts/llm_generality)**: AutoTimes can be easily applied to various kinds of large language models, demonstrating generality and proper scaling behavior without the burden of heavy fine-tuning.
 
 # Updates
 
-:triangular_flag_on_post: **News** (2024.3) All the scripts for the above tasks in our [paper](https://arxiv.org/pdf/2310.06625.pdf) are available in this repo.
+:triangular_flag_on_post: **News** (2024.3) All the scripts for the above tasks in our [paper](https://arxiv.org/pdf/2402.02370.pdf) are available in this repo.
 
 
 ## Introduction
 
-🌟 Considering the characteristics of multivariate time series, AutoTimes breaks the conventional model structure without the burden of modifying any Transformer modules. **Inverted Transformer is all you need in MTSF**.
+🌟 We propose AutoTimes, a simple but effective way to convert off-the-shelf LLMs as time series forecasters without altering parameters. Token-wise Prompting is proposed to utilize textual information (e.g. timestamps).
 
 <p align="center">
 <img src="./figures/motivation.png"  alt="" align=center />
 </p>
-
-🏆 AutoTimes achieves comprehensive state-of-the-art in challenging multivariate forecasting tasks and solves several pain points of Transformer on extensive time series data.
+😊 We ensure the consistency to fully revitalize the capabilities of LLMs as foundation models of time series, including autoregressive token generation, zero-shot capability, in-context learning, and multimodal utilization.
 
 <p align="center">
 <img src="./figures/comparison.png"  alt="" align=center />
 </p>
-😊 **AutoTimes** is repurposed on the vanilla Transformer. We think the "passionate modification" of Transformer has got too much attention in the research area of time series. Hopefully, the mainstream work in the following can focus more on the dataset infrastructure and consider the scale-up ability of Transformer.
+🏆 AutoTimes demonstrate competitive results with existing baselines and have shown proficiency in handling variable series lengths: one model for variable forecast lengths and improved performance with prolonged lookback length.
 
 ## Overall Architecture
 
-AutoTimes regards **independent time series as variate tokens** to **capture multivariate correlations by attention** and **utilize layernorm and feed-forward networks to learn series representations**.
+AutoTimes establishes the tokenization of time series and utilizes textual covariates in segments, accomplished by the consistent training task of the next token prediction.
 
 <p align="center">
 <img src="./figures/method.png" alt="" align=center />
 </p>
+We propose to leverage textual covariates, where simple instructions such as timestamps can boost the forecasting performance, aiding the LLM to be aware of the seasonal patterns and align different variates.
 
 ## Usage 
 
@@ -46,57 +46,67 @@ AutoTimes regards **independent time series as variate tokens** to **capture mul
 pip install -r requirements.txt
 ```
 
-1. The datasets can be obtained from [Google Drive](https://drive.google.com/file/d/1l51QsKvQPcqILT3DwfjCgx8Dsg2rpjot/view?usp=drive_link) or [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/2ea5ca3d621e4e5ba36a/).
+1. The datasets can be obtained from [Google Drive](#) or [Tsinghua Cloud](#).
 
-2. Train and evaluate the model. We provide all the above tasks under the folder ./scripts/. You can reproduce the results as the following examples:
+2. Download the large language models from [Hugging Face](#).
+   1. [GPT2](#)
+
+   2. [OPT Family](#)
+
+   3. [LLaMA-7B](#)
+
+3. Train and evaluate the model. We provide all the above tasks under the folder ./scripts/.
 
 ```
-# Multivariate forecasting with AutoTimes
-bash ./scripts/multivariate_forecasting/Traffic/AutoTimes.sh
+# the default large language model is LLaMA-7B
 
-# Compare the performance of Transformer and AutoTimes
-bash ./scripts/boost_performance/Weather/AutoTimes.sh
+# long-term forecasting
+bash ./scripts/time_series_forecasting/long-term_forecasting/AutoTimes_ETTh1.sh
 
-# Train the model with partial variates, and generalize on the unseen variates
-bash ./scripts/variate_generalization/Electricity/AutoTimes.sh
+# short-term forecasting
+bash ./scripts/time_series_forecasting/short-term_forecasting/AutoTimes_M4.sh
 
-# Test the performance on the enlarged lookback window
-bash ./scripts/increasing_lookback/Traffic/AutoTimes.sh
+# zero-shot forecasting
+bash ./scripts/zeroshot_forecasting/sM4_tM3.sh
+bash ./scripts/zeroshot_forecasting/sM3_tM4.sh
 
-# Utilize FlashAttention for acceleration
-bash ./scripts/efficient_attentions/iFlashTransformer.sh
+# in-context forecasting
+bash ./scripts/in-context_forecasting/zeroshot_baseline.sh
+bash ./scripts/in-context_forecasting/in-context_forecasting.sh
+
+# other large language models
+bash ./scripts/method_generality/opt.sh
 ```
 
-## In-context Forecasting
-
-**Technically, AutoTimes can forecast with arbitrary numbers of variables** during inference. We partition the variates of each dataset into five folders, train models with 20% variates, and use the partially trained model to forecast all varieties. AutoTimes can be trained efficiently and forecast unseen variates with good generalizability.
-
-<p align="center">
-<img src="./figures/in-context.png" alt="" align=center />
-</p>
 ## Zero-shot Forecasting
 
-By introducing the proposed framework, Transformer and its variants achieve **significant performance improvement**, demonstrating the **generality of the AutoTimes approach** and **benefiting from efficient attention mechanisms**.
+we evaluate the performance under the zero-shot scenario, where the forecaster is first trained on a source domain and then directly evaluated on the unseen target domain.
 
 <p align="center">
 <img src="./figures/zeroshot_results.png" alt="" align=center />
 </p>
 
-## Long-term Forecasting
+## In-context Forecasting
+
+AutoTimes can utilize the instructions or demonstrations of time series. Consequently, we propose in-context forecasting. Based on the zero-shot forecasting scenario, we uniformly select the first time series from the target domain as the demonstration and adopt it as the prompt. The composed “time series sentence” is fed into our forecaster for the prediction of the lookback window.
+
+<p align="center">
+<img src="./figures/in-context.png" alt="" align=center />
+</p>
+## Time Series Forecasting
+
+AutoTimes demonstrates competitive performance in long-term and short-term scenarios. Notably, AutoTimes adopts only one single model to cope with variable forecast lengths by autoregression, whereas other baselines necessitate training respectively on different lengths.
 
 <p align="center">
 <img src="./figures/long-term_results.png" alt="" align=center />
 </p>
-
-## Short-term Forecasting
-
 <p align="center">
 <img src="./figures/short-term_results.png" alt="" align=center />
 </p>
 
 ## Model Generality
 
-We propose a training strategy for multivariate series by taking advantage of its variate generation ability. While the performance (Left) remains stable on partially trained variates of each batch with the sampled ratios, the memory footprint (Right) of the training process can be cut off significantly.
+We evaluate the efficiency of each repurposed LLM from three perspectives: forecasting performance, training speed, and parameters, which demonstrates better performance with the increase of parameters validating the scaling law.
 
 <p align="center">
 <img src="./figures/llms.png" alt="" height = "390" align=center />
@@ -104,15 +114,24 @@ We propose a training strategy for multivariate series by taking advantage of it
 
 ## Prolonged Lookbacks
 
-While previous Transformers do not necessarily benefit from the increase of historical observation. AutoTimes show a surprising **improvement in forecasting performance with the increasing length of the lookback window**.
+As language models can generally give more accurate answers with a longer context, the performance of AutoTimes is generally
+improving with the more available lookback observations, which is highly desired in real-world applications.
 
 <p align="center">
 <img src="./figures/lookback.png" alt="" height = "350" align=center />
 </p>
 ## Prompting Ablation
 
+We conduct the ablation on ou Token-wise Prompting by integrating timestamps. The forecasting performance is
+consistently promoted across all datasets and forecasting lengths.
+
 <p align="center">
 <img src="./figures/ablation.png" alt="" align=center />
+</p>
+## Showcases
+
+<p align="center">
+<img src="./figures/showcases.png" alt="" align=center />
 </p>
 
 ## Citation
