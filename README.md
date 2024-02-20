@@ -69,7 +69,7 @@ bash ./scripts/efficient_attentions/iFlashTransformer.sh
 
 ## In-context Forecasting
 
-**Technically, AutoTimes can forecast with arbitrary numbers of variables** during inference. We partition the variates of each dataset into five folders, train models with 20% variates, and use the partially trained model to forecast all varieties. AutoTimess can be trained efficiently and forecast unseen variates with good generalizability.
+**Technically, AutoTimes can forecast with arbitrary numbers of variables** during inference. We partition the variates of each dataset into five folders, train models with 20% variates, and use the partially trained model to forecast all varieties. AutoTimes can be trained efficiently and forecast unseen variates with good generalizability.
 
 <p align="center">
 <img src="./figures/in-context.png" alt="" align=center />
@@ -99,21 +99,20 @@ By introducing the proposed framework, Transformer and its variants achieve **si
 We propose a training strategy for multivariate series by taking advantage of its variate generation ability. While the performance (Left) remains stable on partially trained variates of each batch with the sampled ratios, the memory footprint (Right) of the training process can be cut off significantly.
 
 <p align="center">
-<img src="./figures/llms.png" alt="" height = "400" align=center />
+<img src="./figures/llms.png" alt="" height = "390" align=center />
 </p>
 
+## Prolonged Lookbacks
 
+While previous Transformers do not necessarily benefit from the increase of historical observation. AutoTimes show a surprising **improvement in forecasting performance with the increasing length of the lookback window**.
+
+<p align="center">
+<img src="./figures/lookback.png" alt="" height = "350" align=center />
+</p>
 ## Prompting Ablation
 
 <p align="center">
 <img src="./figures/ablation.png" alt="" align=center />
-</p>
-## Prolonged Lookbacks
-
-While previous Transformers do not necessarily benefit from the increase of historical observation. AutoTimess show a surprising **improvement in forecasting performance with the increasing length of the lookback window**.
-
-<p align="center">
-<img src="./figures/lookback.png" alt="" height = "350" align=center />
 </p>
 
 ## Citation
