@@ -93,9 +93,10 @@ AutoTimes can utilize the instructions or demonstrations of time series. Consequ
 <p align="center">
 <img src="./figures/in-context.png" alt="" align=center />
 </p>
+
 ## Time Series Forecasting
 
-AutoTimes demonstrates competitive performance in long-term and short-term scenarios. Notably, AutoTimes adopts only one single model to cope with variable forecast lengths by autoregression, whereas other baselines necessitate training respectively on different lengths.
+AutoTimes demonstrates competitive performance in long-term and short-term scenarios. Notably, AutoTimes adopts only one single model to tackle variable forecast lengths by autoregression, whereas other baselines necessitate training respectively on different lengths.
 
 <p align="center">
 <img src="./figures/long-term_results.png" alt="" align=center />
