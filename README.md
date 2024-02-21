@@ -35,9 +35,7 @@ AutoTimes establishes the inherent tokenization of time series and utilizes text
 </p>
 We propose to leverage textual covariates, where **instructions in texts such as timestamps can boost the forecasting performance**, aiding the LLM to be aware of the temporal patterns and align different variates.
 
-
-
-> **Comparsion with Existing Methodology**
+#### Comparsion with Existing Methodology
 
 <p align="center">
 <img src="./figures/comparison.png"  alt="" align=center />
@@ -133,12 +131,13 @@ We conduct the ablation on Token-wise Prompting by integrating timestamps. The p
 <p align="center">
 <img src="./figures/ablation.png" alt="" align=center />
 </p>
+
 ## Parameter Efficiency
 
 Despite LLM having a substantial amount of parameters, AutoTimes requires only minimal parameters for training, acomplished by a single pair of MLPs for time series tokenization as the LLM plugin.
 
 <p align="center">
-<img src="./figures/param.png" alt="" height = "200" align=center />
+<img src="./figures/param.png" alt="" height = "150" align=center />
 </p>
 
 ## Showcases
