@@ -17,26 +17,29 @@ The repo is the official implementation for the paper: [AutoTimes: Autoregressiv
 
 ## Introduction
 
-🌟 We propose AutoTimes, a simple but effective way to convert off-the-shelf LLMs as time series forecasters without altering parameters. Token-wise Prompting is proposed to utilize textual information (e.g. timestamps).
+🌟 We propose AutoTimes, a simple but effective way to convert off-the-shelf LLMs as **autoregressive forecasters** with frozen parameters of LLMs. Token-wise Prompting is proposed to utilize textual information (e.g. timestamps).
 
 <p align="center">
 <img src="./figures/motivation.png"  alt="" align=center />
 </p>
-😊 We ensure the consistency to fully revitalize the capabilities of LLMs as foundation models of time series, including autoregressive token generation, zero-shot capability, in-context learning, and multimodal utilization.
+😊 We ensure the consistency to **fully revitalize the capabilities of LLMs as foundation models of time series**, including autoregressive token generation, zero-shot capability, in-context learning, and multimodal utilization.
 
-<p align="center">
-<img src="./figures/comparison.png"  alt="" align=center />
-</p>
-🏆 AutoTimes demonstrate competitive results with existing baselines and have shown proficiency in handling variable series lengths: one model for variable forecast lengths and improved performance with prolonged lookback length.
+🏆 AutoTimes demonstrate competitive results with existing baselines and have shown proficiency in **handling variable series lengths**: one model for variable forecast lengths and improved performance with prolonged lookback length.
 
 ## Overall Architecture
 
-AutoTimes establishes the tokenization of time series and utilizes textual covariates in segments, accomplished by the consistent training task of the next token prediction.
+AutoTimes establishes the inherent tokenization of time series and utilizes textual covariates in segments, accomplished by the consistent training task of the next token prediction.
 
 <p align="center">
 <img src="./figures/method.png" alt="" align=center />
 </p>
-We propose to leverage textual covariates, where simple instructions such as timestamps can boost the forecasting performance, aiding the LLM to be aware of the seasonal patterns and align different variates.
+We propose to leverage textual covariates, where **instructions in texts such as timestamps can boost the forecasting performance**, aiding the LLM to be aware of the temporal patterns and align different variates.
+
+> **Comparsion with Existing Methodology**
+
+<p align="center">
+<img src="./figures/comparison.png"  alt="" align=center />
+</p>
 
 ## Usage 
 
@@ -88,7 +91,7 @@ We evaluate the performance under the zero-shot scenario, where the forecaster i
 
 ## In-context Forecasting
 
-AutoTimes can utilize the instructions in time series, where we propose in-context forecasting. Based on the zero-shot forecasting scenario, we uniformly select forecasting demonstration from the target domain and adopt it as the prompt. The composed “time series sentence” is fed into our forecaster for the prediction of the lookback window.
+AutoTimes can **also utilize the instructions in time series**, where we propose in-context forecasting. Based on the zero-shot forecasting scenario, we uniformly select forecasting demonstration from the target domain and adopt it as the prompt. The composed “time series sentence” is fed into our forecaster for the prediction of the lookback window.
 
 <p align="center">
 <img src="./figures/in-context.png" alt="" align=center />
@@ -96,7 +99,7 @@ AutoTimes can utilize the instructions in time series, where we propose in-conte
 
 ## Time Series Forecasting
 
-AutoTimes demonstrates competitive performance in long-term and short-term scenarios. Notably, AutoTimes adopts only one single model to tackle variable forecast lengths by autoregression, whereas other baselines necessitate training respectively on different lengths.
+AutoTimes demonstrates competitive performance in long-term and short-term scenarios. Notably, AutoTimes **adopts only one single model to tackle arbitrary forecast lengths by autoregression**, whereas other baselines necessitate training respectively on different lengths.
 
 <p align="center">
 <img src="./figures/long-term_results.png" alt="" align=center />
@@ -107,7 +110,7 @@ AutoTimes demonstrates competitive performance in long-term and short-term scena
 
 ## Model Generality
 
-We evaluate the efficiency of each repurposed LLM from three perspectives: forecasting performance, training speed, and parameters, demonstrating improved performance with the increase of parameters that validates the scaling law.
+We evaluate the efficiency of each repurposed LLM from three perspectives: forecasting performance, training speed, and parameters, demonstrating improved performance with the increase of parameters that **validates the scaling law**.
 
 <p align="center">
 <img src="./figures/llms.png" alt="" height = "390" align=center />
@@ -115,8 +118,7 @@ We evaluate the efficiency of each repurposed LLM from three perspectives: forec
 
 ## Prolonged Lookbacks
 
-As language models can generally give more accurate answers with a longer context, the performance of AutoTimes is generally
-improving with the more available lookback observations, which is highly desired in real-world applications.
+As language models can generally give more accurate answers with a longer context, **the performance of AutoTimes is generally improving with the more available lookback observations**, which is highly desired in real-world applications.
 
 <p align="center">
 <img src="./figures/lookback.png" alt="" height = "350" align=center />
@@ -124,11 +126,17 @@ improving with the more available lookback observations, which is highly desired
 
 ## Prompting Ablation
 
-We conduct the ablation on ou Token-wise Prompting by integrating timestamps. The forecasting performance is
-consistently promoted across all datasets and forecasting lengths.
+We conduct the ablation on Token-wise Prompting by integrating timestamps. The performance is **consistently promoted by the datetime information** across all datasets and forecasting lengths.
 
 <p align="center">
 <img src="./figures/ablation.png" alt="" align=center />
+</p>
+## Parameter Efficiency
+
+Despite LLM having a substantial amount of parameters, AutoTimes requires only minimal parameters for training, acomplished by a single pair of MLPs for time series tokenization as the LLM plugin.
+
+<p align="center">
+<img src="./figures/param.png" alt="" height = "200" align=center />
 </p>
 
 ## Showcases
