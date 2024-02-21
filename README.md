@@ -26,7 +26,7 @@ The repo is the official implementation for the paper: [AutoTimes: Autoregressiv
 
 🏆 AutoTimes demonstrate competitive results with existing baselines and have shown proficiency in **handling variable series lengths**: one model for variable forecast lengths and improved performance with prolonged lookback length.
 
-## Overall Architecture
+## Overall Approach
 
 AutoTimes establishes the inherent tokenization of time series and utilizes textual covariates in segments, accomplished by the consistent training task of the next token prediction.
 
@@ -34,6 +34,8 @@ AutoTimes establishes the inherent tokenization of time series and utilizes text
 <img src="./figures/method.png" alt="" align=center />
 </p>
 We propose to leverage textual covariates, where **instructions in texts such as timestamps can boost the forecasting performance**, aiding the LLM to be aware of the temporal patterns and align different variates.
+
+
 
 > **Comparsion with Existing Methodology**
 
