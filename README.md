@@ -22,7 +22,7 @@ The repo is the official implementation for the paper: [AutoTimes: Autoregressiv
 <p align="center">
 <img src="./figures/motivation.png"  alt="" align=center />
 </p>
-💪 We aim to 💪fully revitalize the capabilities of LLMs as foundation models of time series**, including autoregressive token generation, zero-shot capability, in-context learning, and multimodal utilization.
+💪 We aim to **fully revitalize the capabilities of LLMs as foundation models of time series**, including autoregressive token generation, zero-shot capability, in-context learning, and multimodal utilization.
 
 🏆 AutoTimes demonstrate competitive results with existing baselines and have shown proficiency in **handling variable series lengths**: one model for variable forecast lengths and improved performance with prolonged lookback length.
 
@@ -33,7 +33,7 @@ AutoTimes establishes the inherent tokenization of time series and utilizes text
 <p align="center">
 <img src="./figures/method.png" alt="" align=center />
 </p>
-We propose to leverage textual covariates, where **instructions in texts such as timestamps can boost the forecasting performance**, aiding the LLM to be aware of the temporal patterns and align different variates.
+We propose to leverage textual covariates, where **instructions in texts such as timestamps can boost the performance**, aiding the LLM to be aware of the temporal patterns and correlate multiple variates.
 
 #### Comparsion with Existing LLM4TS Methodology
 
