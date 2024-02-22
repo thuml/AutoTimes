@@ -8,7 +8,7 @@ The repo is the official implementation for the paper: [AutoTimes: Autoregressiv
 
 > **[In-context Forecasting](./scripts/in-context_forecasting/)**: We propose in-context forecasting in this paper, where instructions in time series itself are available to further enhance forecasting.
 
-> **[Generality on Large Language Models](scripts/llm_generality)**: AutoTimes can be easily applied to various kinds of large language models, demonstrating generality and proper scaling behavior without the burden of heavy fine-tuning.
+> **[Generality on Large Language Models](scripts/llm_generality)**: AutoTimes can be easily applied to various kinds of large language models, demonstrating generality and proper scaling behavior.
 
 # Updates
 
@@ -17,12 +17,12 @@ The repo is the official implementation for the paper: [AutoTimes: Autoregressiv
 
 ## Introduction
 
-🌟 We propose AutoTimes, a simple but effective way to convert off-the-shelf LLMs as **autoregressive forecasters** with frozen parameters of LLMs. Token-wise Prompting is proposed to utilize textual information (e.g. timestamps).
+🌟 We propose AutoTimes, a simple but effective way to convert off-the-shelf LLMs as **autoregressive forecasters** with frozen parameters of LLMs. Token-wise Prompting is also proposed to incorporate textual information (e.g. timestamps).
 
 <p align="center">
 <img src="./figures/motivation.png"  alt="" align=center />
 </p>
-😊 We ensure the consistency to **fully revitalize the capabilities of LLMs as foundation models of time series**, including autoregressive token generation, zero-shot capability, in-context learning, and multimodal utilization.
+💪 We aim to 💪fully revitalize the capabilities of LLMs as foundation models of time series**, including autoregressive token generation, zero-shot capability, in-context learning, and multimodal utilization.
 
 🏆 AutoTimes demonstrate competitive results with existing baselines and have shown proficiency in **handling variable series lengths**: one model for variable forecast lengths and improved performance with prolonged lookback length.
 
@@ -35,7 +35,7 @@ AutoTimes establishes the inherent tokenization of time series and utilizes text
 </p>
 We propose to leverage textual covariates, where **instructions in texts such as timestamps can boost the forecasting performance**, aiding the LLM to be aware of the temporal patterns and align different variates.
 
-#### Comparsion with Existing Methodology
+#### Comparsion with Existing LLM4TS Methodology
 
 <p align="center">
 <img src="./figures/comparison.png"  alt="" align=center />
