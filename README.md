@@ -93,7 +93,7 @@ We evaluate the performance under the zero-shot scenario, where the forecaster i
 
 ## In-context Forecasting
 
-AutoTimes can **also utilize the instructions in time series**, where we propose in-context forecasting. Based on the zero-shot forecasting scenario, we uniformly select forecasting demonstration from the target domain and adopt it as the prompt. The composed “time series sentence” is fed into our forecaster for the prediction of the lookback window.
+AutoTimes can **also utilize the instructions in time series**, where we propose in-context forecasting. Based on the zero-shot forecasting scenario, we uniformly select forecasting demonstration from the target domain and adopt it as the prompt. The composed `   ``time series sentence'' is fed into our forecaster for the prediction of the lookback window.
 
 <p align="center">
 <img src="./figures/in-context.png" alt="" align=center />
@@ -136,7 +136,7 @@ We conduct the ablation on Token-wise Prompting by integrating timestamps. The p
 
 ## Parameter Efficiency
 
-Despite LLM having a substantial amount of parameters, AutoTimes requires only minimal parameters for training, acomplished by a single pair of MLPs for time series tokenization as the LLM plugin.
+Despite LLM having a substantial amount of parameters, AutoTimes requires only minimal parameters for training, acomplished by a single pair of MLPs for time series tokenization as the plugin of LLMs.
 
 <p align="center">
 <img src="./figures/param.png" alt="" height = "150" align=center />
