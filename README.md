@@ -139,7 +139,7 @@ We conduct the ablation on Token-wise Prompting by integrating timestamps. The p
 Despite LLM having a substantial amount of parameters, AutoTimes requires only minimal parameters for training, acomplished by a single pair of MLPs for time series tokenization as the plugin of LLMs.
 
 <p align="center">
-<img src="./figures/param.png" alt="" height = "150" align=center />
+<img src="./figures/param.png" alt="" align=center />
 </p>
 
 ## Showcases
