@@ -17,7 +17,7 @@ The repo is the official implementation for the paper: [AutoTimes: Autoregressiv
 
 ## Introduction
 
-🌟 While prevalent forecasting models adopt the encoder structure with peojection, we propose AutoTimes, a simple but effective way to convert off-the-shelf LLMs as **autoregressive forecasters** with frozen parameters of LLMs. **Token-wise** Prompting is also proposed to incorporate textual information (e.g. timestamps).
+🌟 While prevalent forecasting models adopt the encoder-only structure with projection, we propose AutoTimes, a simple but effective way to convert off-the-shelf LLMs as **autoregressive forecasters** with frozen parameters of LLMs. **Token-wise** Prompting is also proposed to incorporate textual information (e.g. timestamps).
 
 <p align="center">
 <img src="./figures/motivation.png"  alt="" align=center />
