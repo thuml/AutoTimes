@@ -15,6 +15,15 @@ The repo is the official implementation for the paper: [AutoTimes: Autoregressiv
 :triangular_flag_on_post: **News** (2024.3) All the scripts for the above tasks in our [paper](https://arxiv.org/pdf/2402.02370.pdf) are available in this repo.
 
 
+## Showcases
+
+We provide several showcases comparing the zero-shot and in-context forecasting results.
+
+<p align="center">
+<img src="./figures/showcases.png" alt="" align=center />
+</p>
+
+
 ## Introduction
 
 🌟 While prevalent forecasting models adopt the encoder-only structure with projection, we propose AutoTimes, a simple but effective way to convert off-the-shelf LLMs as **autoregressive forecasters** with frozen parameters of LLMs. **Token-wise** Prompting is also proposed to incorporate textual information (e.g. timestamps).
@@ -104,9 +113,6 @@ AutoTimes can **also utilize the instructions in time series**, where we propose
 AutoTimes demonstrates competitive performance in long-term and short-term scenarios. Notably, AutoTimes **adopts only one single model to tackle arbitrary forecast lengths by autoregression**, whereas other baselines necessitate training respectively on different lengths.
 
 <p align="center">
-<img src="./figures/long-term_results.png" alt="" align=center />
-</p>
-<p align="center">
 <img src="./figures/short-term_results.png" alt="" align=center />
 </p>
 
@@ -122,10 +128,6 @@ We evaluate the efficiency of each repurposed LLM from three perspectives: forec
 
 As language models can generally give more accurate answers with a longer context, **the performance of AutoTimes is generally improving with the more available lookback observations**, which is highly desired in real-world applications.
 
-<p align="center">
-<img src="./figures/lookback.png" alt="" height = "350" align=center />
-</p>
-
 ## Prompting Ablation
 
 We conduct the ablation on Token-wise Prompting by integrating timestamps. The performance is **consistently promoted by the datetime information** across all datasets and forecasting lengths.
@@ -136,19 +138,7 @@ We conduct the ablation on Token-wise Prompting by integrating timestamps. The p
 
 ## Parameter Efficiency
 
-Despite LLM having a substantial amount of parameters, AutoTimes requires only minimal parameters for training, acomplished by a single pair of MLPs for time series tokenization as the plugin of LLMs.
-
-<p align="center">
-<img src="./figures/param.png" alt="" align=center />
-</p>
-
-## Showcases
-
-We provide several showcases showing the zero-shot and in-context forecasting results.
-
-<p align="center">
-<img src="./figures/showcases.png" alt="" align=center />
-</p>
+Despite LLM having a substantial amount of parameters, AutoTimes requires only minimal parameters (up to 0.1%) for training, acomplished by a single pair of MLPs for time series tokenization as the plugin of LLMs.
 
 ## Citation
 
