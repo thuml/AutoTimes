@@ -1,0 +1,167 @@
+export CUDA_VISIBLE_DEVICES=0
+
+model_name=AutoTimes_Llama
+
+python -u run.py \
+  --task_name zero_shot_forecast \
+  --is_training 1 \
+  --root_path ./dataset/tsf \
+  --data_path m3_yearly_dataset.tsf \
+  --test_data_path m4_yearly_dataset.tsf \
+  --seasonal_patterns 'Yearly' \
+  --model_id m3_Yearly \
+  --model $model_name \
+  --data tsf \
+  --seq_len 6 \
+  --label_len 0 \
+  --token_len 6 \
+  --test_seq_len 6 \
+  --test_label_len 0 \
+  --test_pred_len 6 \
+  --learning_rate 0.0001 \
+  --mlp_hidden_dim 256 \
+  --mlp_hidden_layers 3 \
+  --batch_size 16 \
+  --des 'Exp' \
+  --itr 1 \
+  --loss 'SMAPE' \
+  --use_amp \
+  --cosine \
+  --tmax 10 \
+  --val_set_shuffle
+
+python -u run.py \
+  --task_name zero_shot_forecast \
+  --is_training 1 \
+  --root_path ./dataset/tsf \
+  --data_path m3_quarterly_dataset.tsf \
+  --test_data_path m4_quarterly_dataset.tsf \
+  --seasonal_patterns 'Quarterly' \
+  --model_id m3_Quarterly \
+  --model $model_name \
+  --data tsf \
+  --seq_len 8 \
+  --label_len 0 \
+  --token_len 8 \
+  --test_seq_len 8 \
+  --test_label_len 0 \
+  --test_pred_len 8 \
+  --learning_rate 0.000005 \
+  --mlp_hidden_dim 1024 \
+  --batch_size 16 \
+  --des 'Exp' \
+  --itr 1 \
+  --loss 'SMAPE' \
+  --use_amp \
+  --cosine \
+  --tmax 10 \
+  --val_set_shuffle
+
+python -u run.py \
+  --task_name zero_shot_forecast \
+  --is_training 1 \
+  --root_path ./dataset/tsf \
+  --data_path m3_monthly_dataset.tsf \
+  --test_data_path m4_monthly_dataset.tsf \
+  --seasonal_patterns 'Monthly' \
+  --model_id m3_Monthly \
+  --model $model_name \
+  --data tsf \
+  --seq_len 24 \
+  --label_len 0 \
+  --token_len 24 \
+  --test_seq_len 24 \
+  --test_label_len 0 \
+  --test_pred_len 24 \
+  --learning_rate 0.00001 \
+  --mlp_hidden_dim 512 \
+  --batch_size 16 \
+  --des 'Exp' \
+  --itr 1 \
+  --loss 'SMAPE' \
+  --use_amp \
+  --cosine \
+  --tmax 10 \
+  --val_set_shuffle
+
+python -u run.py \
+  --task_name zero_shot_forecast \
+  --is_training 1 \
+  --root_path ./dataset/tsf \
+  --data_path m3_monthly_dataset.tsf \
+  --test_data_path m4_weekly_dataset.tsf \
+  --seasonal_patterns 'Monthly' \
+  --model_id m3_Monthly \
+  --model $model_name \
+  --data tsf \
+  --seq_len 26 \
+  --label_len 13 \
+  --token_len 13 \
+  --test_seq_len 26 \
+  --test_label_len 13 \
+  --test_pred_len 13 \
+  --learning_rate 0.001 \
+  --mlp_hidden_dim 256 \
+  --batch_size 16 \
+  --des 'Exp' \
+  --itr 1 \
+  --loss 'SMAPE' \
+  --use_amp \
+  --cosine \
+  --tmax 10 \
+  --val_set_shuffle
+
+python -u run.py \
+  --task_name zero_shot_forecast \
+  --is_training 1 \
+  --root_path ./dataset/tsf \
+  --data_path m3_monthly_dataset.tsf \
+  --test_data_path m4_daily_dataset.tsf \
+  --seasonal_patterns 'Monthly' \
+  --model_id m3_Monthly \
+  --model $model_name \
+  --data tsf \
+  --seq_len 28 \
+  --label_len 14 \
+  --token_len 14 \
+  --test_seq_len 28 \
+  --test_label_len 14 \
+  --test_pred_len 14 \
+  --learning_rate 0.0001 \
+  --mlp_hidden_dim 256 \
+  --batch_size 16 \
+  --des 'Exp' \
+  --itr 1 \
+  --loss 'SMAPE' \
+  --use_amp \
+  --cosine \
+  --tmax 10 \
+  --val_set_shuffle
+
+python -u run.py \
+  --task_name zero_shot_forecast \
+  --is_training 1 \
+  --root_path ./dataset/tsf \
+  --data_path m3_monthly_dataset.tsf \
+  --test_data_path m4_hourly_dataset.tsf \
+  --seasonal_patterns 'Monthly' \
+  --model_id m3_Monthly \
+  --model $model_name \
+  --data tsf \
+  --seq_len 48 \
+  --label_len 24 \
+  --token_len 24 \
+  --test_seq_len 48 \
+  --test_label_len 24 \
+  --test_pred_len 48 \
+  --learning_rate 0.001 \
+  --mlp_hidden_dim 128 \
+  --mlp_hidden_layers 3 \
+  --batch_size 16 \
+  --des 'Exp' \
+  --itr 1 \
+  --loss 'SMAPE' \
+  --use_amp \
+  --cosine \
+  --tmax 10 \
+  --val_set_shuffle

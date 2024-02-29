@@ -1,42 +1,32 @@
-from data_provider.data_loader import Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom, Dataset_M4, PSMSegLoader, \
-    MSLSegLoader, SMAPSegLoader, SMDSegLoader, SWATSegLoader, UEAloader, Dataset_Solar, Dataset_PEMS, Dataset_TSF
-from data_provider.uea import collate_fn
+from data_provider.data_loader import Dataset_ETT_hour, Dataset_Custom, Dataset_M4, Dataset_Solar, Dataset_TSF, Dataset_TSF_ICL
 from torch.utils.data import DataLoader
 from torch.utils.data.distributed import DistributedSampler
 
 data_dict = {
     'ETTh1': Dataset_ETT_hour,
-    'ETTh2': Dataset_ETT_hour,
-    'ETTm1': Dataset_ETT_minute,
-    'ETTm2': Dataset_ETT_minute,
     'custom': Dataset_Custom,
     'm4': Dataset_M4,
-    'PSM': PSMSegLoader,
-    'MSL': MSLSegLoader,
-    'SMAP': SMAPSegLoader,
-    'SMD': SMDSegLoader,
-    'SWAT': SWATSegLoader,
-    'UEA': UEAloader,
     'Solar': Dataset_Solar,
-    'PEMS': Dataset_PEMS,
-    'm3': Dataset_TSF
+    'tsf': Dataset_TSF,
+    'tsf_icl': Dataset_TSF_ICL
 }
 
 
 def data_provider(args, flag):
     Data = data_dict[args.data]
-    timeenc = 0 if args.embed != 'timeF' else 1
 
-    if flag in ['test', 'val']:
+    if flag == 'test':
         shuffle_flag = False
         drop_last = False
         batch_size = args.batch_size 
-        freq = args.freq
+    elif flag == 'val':
+        shuffle_flag = args.val_set_shuffle
+        drop_last = False
+        batch_size = args.batch_size 
     else:
         shuffle_flag = True
-        drop_last = False
+        drop_last = args.drop_last
         batch_size = args.batch_size
-        freq = args.freq
 
     if flag in ['train', 'val']:
         data_set = Data(
@@ -44,13 +34,8 @@ def data_provider(args, flag):
             data_path=args.data_path,
             flag=flag,
             size=[args.seq_len, args.label_len, args.token_len],
-            features=args.features,
-            target=args.target,
-            timeenc=timeenc,
-            freq=freq,
             seasonal_patterns=args.seasonal_patterns,
-            few_shot=args.few_shot,
-            few_shot_percentage=args.few_shot_percentage,
+            drop_short=args.drop_short,
         )
     else:
         data_set = Data(
@@ -58,13 +43,8 @@ def data_provider(args, flag):
             data_path=args.data_path,
             flag=flag,
             size=[args.test_seq_len, args.test_label_len, args.test_pred_len],
-            features=args.features,
-            target=args.target,
-            timeenc=timeenc,
-            freq=freq,
             seasonal_patterns=args.seasonal_patterns,
-            few_shot=args.few_shot,
-            few_shot_percentage=args.few_shot_percentage,
+            drop_short=args.drop_short,
         )
     if (args.use_multi_gpu and args.local_rank == 0) or not args.use_multi_gpu:
         print(flag, len(data_set))
