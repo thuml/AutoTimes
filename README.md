@@ -6,7 +6,7 @@ The repo is the official implementation for the paper: [AutoTimes: Autoregressiv
 
 > **[Zero-shot Forecasting](./scripts/zeroshot_forecasting/)**: Large models exhibiting remarkable zero-shot capability are beneficial for data-scarce applications, where AutoTimes takes advantage of this and demonstrates good performance on scenarios without training samples.
 
-> **[In-context Forecasting](./scripts/in-context_forecasting/)**: We propose in-context forecasting in this paper, where instructions in time series itself are available to further enhance forecasting.
+> **[In-context Forecasting](./scripts/in-context_forecasting/)**: We propose in-context forecasting for the first time, where instructions in time series itself are available to further enhance forecasting.
 
 > **[Generality on Large Language Models](scripts/llm_generality)**: AutoTimes can be easily applied to various kinds of large language models, demonstrating generality and proper scaling behavior.
 
@@ -17,7 +17,7 @@ The repo is the official implementation for the paper: [AutoTimes: Autoregressiv
 
 ## Showcases
 
-We provide several showcases comparing the zero-shot and in-context forecasting results.
+We provide several showcases of zero-shot and in-context forecasting results.
 
 <p align="center">
 <img src="./figures/showcases.png" alt="" align=center />
@@ -44,7 +44,7 @@ We provide several showcases comparing the zero-shot and in-context forecasting 
 <img src="./figures/method.png" alt="" align=center />
 </p>
 
-* We propose to leverage textual covariates, where **instructions in texts such as timestamps can boost the performance**, aiding the LLM to be aware of the temporal patterns and correlate multiple variates.
+* We propose to leverage textual covariates, where **instructions in texts such as timestamps can boost the performance**, aiding the LLM to be aware of the temporal patterns and correlate variates at the same timestamp.
 
 #### Comparsion with Existing LLM4TS Methodology
 
@@ -102,7 +102,7 @@ We evaluate the performance under the zero-shot scenario, where the forecaster i
 
 ## In-context Forecasting
 
-AutoTimes can **also utilize the instructions in time series**, where we propose in-context forecasting. Based on the zero-shot forecasting scenario, we uniformly select forecasting demonstration from the target domain and adopt it as the prompt. The composed `   ``time series sentence'' is fed into our forecaster for the prediction of the lookback window.
+AutoTimes can **also utilize the instructions in time series**, where we propose in-context forecasting. Based on the zero-shot forecasting scenario, we uniformly select forecasting demonstration from the target domain and adopt it as the prompt. The composed **time series sentence** is fed into our forecaster for the prediction of the lookback window.
 
 <p align="center">
 <img src="./figures/in-context.png" alt="" align=center />
@@ -121,7 +121,7 @@ AutoTimes demonstrates competitive performance in long-term and short-term scena
 We evaluate the efficiency of each repurposed LLM from three perspectives: forecasting performance, training speed, and parameters, demonstrating improved performance with the increase of parameters that **validates the scaling law**.
 
 <p align="center">
-<img src="./figures/llms.png" alt="" height = "390" align=center />
+<img src="./figures/llms.png" alt="" height = "300" align=center />
 </p>
 
 ## Prolonged Lookbacks
@@ -138,7 +138,7 @@ We conduct the ablation on Token-wise Prompting by integrating timestamps. The p
 
 ## Parameter Efficiency
 
-Despite LLM having a substantial amount of parameters, AutoTimes requires only minimal parameters (up to 0.1%) for training, acomplished by a single pair of MLPs for time series tokenization as the plugin of LLMs.
+Despite LLM having a substantial amount of parameters, AutoTimes requires only minimal parameters (**up to 0.1%**) for training, acomplished by a single pair of MLPs for time series tokenization as the plugin of LLMs.
 
 ## Citation
 
