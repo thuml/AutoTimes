@@ -1,5 +1,5 @@
-datasets/
 .DS_Store
+dataset/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -131,4 +131,16 @@ venv.bak/
 dmypy.json
 
 # Pyre type checker
+<<<<<<< HEAD
 .pyre/
+=======
+.pyre/
+
+/dataset/
+/llama/
+/checkpoints/
+/test_results/
+/m4_results/
+/models--gpt2/
+/models--facebook--opt-1.3b/
+>>>>>>> ea783ac51b173bf46a9d5ae232f6ff9e1defc02e
