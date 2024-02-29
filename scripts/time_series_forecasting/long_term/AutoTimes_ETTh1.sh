@@ -1,6 +1,6 @@
-export CUDA_VISIBLE_DEVICES=0
 model_name=AutoTimes_Llama
 
+# training one model with a context length
 python -u run.py \
   --task_name long_term_forecast \
   --is_training 1 \
@@ -26,6 +26,7 @@ python -u run.py \
   --mix_embeds \
   --drop_last
 
+# testing the model on all forecast lengths
 for test_pred_len in 96 192 336 720
 do
 python -u run.py \

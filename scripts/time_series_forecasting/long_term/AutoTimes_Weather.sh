@@ -1,5 +1,6 @@
 model_name=AutoTimes_Llama
 
+# training one model with a context length
 torchrun --nnodes 1 --nproc-per-node 4 run.py \
   --task_name long_term_forecast \
   --is_training 1 \
@@ -25,6 +26,7 @@ torchrun --nnodes 1 --nproc-per-node 4 run.py \
   --use_multi_gpu \
   --mix_embeds
 
+# testing the model on all forecast lengths
 for test_pred_len in 96 192 336 720
 do
 python -u run.py \

@@ -4,7 +4,7 @@ The repo is the official implementation for the paper: [AutoTimes: Autoregressiv
 
 > **[Time Series Forecasting](./scripts/multivariate_forecasting/)**: We repurpose large language models as out-of-box time series forecasters on benchmarks including long-term and short-term forecasting.
 
-> **[Zero-shot Forecasting](./scripts/zeroshot_forecasting/)**: Large models exhibiting remarkable zero-shot capability are beneficial for data-scarce applications, where AutoTimes takes advantage of this and demonstrates good performance on scenarios without training samples.
+> **[Zero-shot Forecasting](./scripts/zeroshot_forecasting/)**: Large models exhibiting remarkable zero-shot capability are beneficial for data-scarce applications. AutoTimes takes advantage of this and demonstrates good performance without training samples.
 
 > **[In-context Forecasting](./scripts/in-context_forecasting/)**: We propose in-context forecasting for the first time, where instructions in time series itself are available to further enhance forecasting.
 
@@ -12,7 +12,7 @@ The repo is the official implementation for the paper: [AutoTimes: Autoregressiv
 
 # Updates
 
-:triangular_flag_on_post: **News** (2024.3) All the scripts for the above tasks in our [paper](https://arxiv.org/pdf/2402.02370.pdf) are available in this repo.
+:triangular_flag_on_post: **News** (2024.2) All the scripts for the above tasks in our [paper](https://arxiv.org/pdf/2402.02370.pdf) are available in this repo.
 
 
 ## Showcases
@@ -26,7 +26,7 @@ We provide several showcases of zero-shot and in-context forecasting results.
 
 ## Introduction
 
-🌟 While prevalent forecasting models adopt the encoder-only structure with projection, we propose AutoTimes, a simple but effective way to convert off-the-shelf LLMs as **autoregressive forecasters** with frozen parameters of LLMs. **Token-wise** Prompting is also proposed to incorporate textual information (e.g. timestamps).
+🌟 While prevalent forecasting models adopt the encoder-only structure with projection, we propose AutoTimes, a simple but effective way to convert generative LLMs as **autoregressive forecasters** with frozen parameters. **Token-wise** Prompting is also proposed to incorporate textual information (e.g. timestamps).
 
 <p align="center">
 <img src="./figures/motivation.png"  alt="" align=center />
@@ -34,19 +34,19 @@ We provide several showcases of zero-shot and in-context forecasting results.
 
 💪 We aim to **fully revitalize the capabilities of LLMs as foundation models of time series**, including autoregressive token generation, zero-shot capability, in-context learning, and multimodal utilization.
 
-🏆 AutoTimes demonstrate competitive results with existing baselines and have shown proficiency in **handling variable series lengths**: one model for variable forecast lengths and improved performance with prolonged lookback length.
+🏆 AutoTimes demonstrate competitive results with existing baselines and have shown proficiency in **handling variable series lengths**: one model for all forecast lengths and gain with prolonged lookback.
 
 ## Overall Approach
 
-* AutoTimes establishes the inherent tokenization of time series and utilizes textual covariates in segments, accomplished by the consistent training task of the next token prediction.
+* Establish the tokenization by the consistent training of Next Token Prediction.
+* Ultilize inherent token transitions within the frozen LLM blocks to predict time series tokens 
+* Prompted by textual covariates, such as timestamps aggregated in segments.
 
 <p align="center">
 <img src="./figures/method.png" alt="" align=center />
 </p>
 
-* We propose to leverage textual covariates, where **instructions in texts such as timestamps can boost the performance**, aiding the LLM to be aware of the temporal patterns and correlate variates at the same timestamp.
-
-#### Comparsion with Existing LLM4TS Methodology
+#### Comparsion with Other LLM4TS Methodology
 
 <p align="center">
 <img src="./figures/comparison.png"  alt="" align=center />
@@ -60,7 +60,8 @@ We provide several showcases of zero-shot and in-context forecasting results.
 pip install -r requirements.txt
 ```
 
-1. The datasets can be obtained from [Google Drive](#) or [Tsinghua Cloud](#).
+1. Put the datasets [[Google Drive]](https://drive.google.com/file/d/1yffcQBcMLasQcT7cdotjOVcg-2UKRarw/view?usp=sharing)
+[[Tsinghua Cloud]](https://cloud.tsinghua.edu.cn/f/93388a1811584564a40a/) under the folder ```./dataset/```.
 
 2. Download the large language models from [Hugging Face](#).
    1. [GPT2](#)
@@ -69,24 +70,23 @@ pip install -r requirements.txt
 
    3. [LLaMA-7B](#)
 
-3. Train and evaluate the model. We provide all the above tasks under the folder ./scripts/.
+3. Train and evaluate the model. We provide all the above tasks under the folder ```./scripts/```.
 
 ```
 # the default large language model is LLaMA-7B
 
 # long-term forecasting
-bash ./scripts/time_series_forecasting/long-term_forecasting/AutoTimes_ETTh1.sh
+bash ./scripts/time_series_forecasting/long_term/AutoTimes_ETTh1.sh
 
 # short-term forecasting
-bash ./scripts/time_series_forecasting/short-term_forecasting/AutoTimes_M4.sh
+bash ./scripts/time_series_forecasting/short_term/AutoTimes_M4.sh
 
 # zero-shot forecasting
-bash ./scripts/zeroshot_forecasting/sM4_tM3.sh
-bash ./scripts/zeroshot_forecasting/sM3_tM4.sh
+bash ./scripts/zero_shot_forecasting/sM4_tM3.sh
+bash ./scripts/zero_shot_forecasting/sM3_tM4.sh
 
 # in-context forecasting
-bash ./scripts/in-context_forecasting/zeroshot_baseline.sh
-bash ./scripts/in-context_forecasting/in-context_forecasting.sh
+bash ./scripts/in_context_forecasting/in-context_forecasting.sh
 
 # other large language models
 bash ./scripts/method_generality/opt.sh
@@ -102,7 +102,7 @@ We evaluate the performance under the zero-shot scenario, where the forecaster i
 
 ## In-context Forecasting
 
-AutoTimes can **also utilize the instructions in time series**, where we propose in-context forecasting. Based on the zero-shot forecasting scenario, we uniformly select forecasting demonstration from the target domain and adopt it as the prompt. The composed **time series sentence** is fed into our forecaster for the prediction of the lookback window.
+AutoTimes can **also utilize the instructions in time series**, where we propose **in-context forecasting**. Inspired by In-Context Learning of LLMs, we provide forecasting demonstration from the target domain as the prompt. The composed **time series sentence** is fed into our forecaster, which effectively empowers the prediction.
 
 <p align="center">
 <img src="./figures/in-context.png" alt="" align=center />
@@ -124,10 +124,6 @@ We evaluate the efficiency of each repurposed LLM from three perspectives: forec
 <img src="./figures/llms.png" alt="" height = "300" align=center />
 </p>
 
-## Prolonged Lookbacks
-
-As language models can generally give more accurate answers with a longer context, **the performance of AutoTimes is generally improving with the more available lookback observations**, which is highly desired in real-world applications.
-
 ## Prompting Ablation
 
 We conduct the ablation on Token-wise Prompting by integrating timestamps. The performance is **consistently promoted by the datetime information** across all datasets and forecasting lengths.
@@ -136,9 +132,18 @@ We conduct the ablation on Token-wise Prompting by integrating timestamps. The p
 <img src="./figures/ablation.png" alt="" align=center />
 </p>
 
+## Prolonged Lookbacks
+
+As language models can generally give more accurate answers with a longer context, **the performance of AutoTimes is generally improving with the more available lookback observations**, which is highly desired in real-world applications.
+
 ## Parameter Efficiency
 
 Despite LLM having a substantial amount of parameters, AutoTimes requires only minimal parameters (**up to 0.1%**) for training, acomplished by a single pair of MLPs for time series tokenization as the plugin of LLMs.
+
+## Training on Custom Data
+
+Tutorials are provided in this [repo](https://github.com/thuml/iTransformer/tree/main/scripts/multivariate_forecasting).
+
 
 ## Citation
 

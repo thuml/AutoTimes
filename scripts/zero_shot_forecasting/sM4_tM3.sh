@@ -1,5 +1,3 @@
-export CUDA_VISIBLE_DEVICES=0
-
 model_name=AutoTimes_Llama
 
 python -u run.py \

@@ -76,7 +76,6 @@ python -u run.py \
   --cosine \
   --tmax 10
 
-
 python -u run.py \
   --task_name short_term_forecast \
   --is_training 1 \
