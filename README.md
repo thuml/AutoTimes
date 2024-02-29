@@ -63,7 +63,7 @@ pip install -r requirements.txt
 1. Put the datasets [[Google Drive]](https://drive.google.com/file/d/1t7jOkctNJ0rt3VMwZaqmxSuA75TFEo96/view?usp=sharing)
 [[Tsinghua Cloud]](https://cloud.tsinghua.edu.cn/f/849427d3926f4fabbee7/) under the folder ```./dataset/```.
 
-2. Download the large language models from [Hugging Face](https://huggingface.co/).
+2. Download the large language models from [Hugging Face](https://huggingface.co/) and specify the model path using the `llm_ckp_dir` parameter in scripts.
    * [GPT2](https://huggingface.co/openai-community/gpt2)
    * [OPT Family](https://huggingface.co/facebook/opt-125m)
    * [LLaMA-7B](https://huggingface.co/meta-llama/Llama-2-7b)
