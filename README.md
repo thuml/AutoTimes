@@ -2,13 +2,13 @@
 
 The repo is the official implementation for the paper: [AutoTimes: Autoregressive Time Series Forecasters via Large Language Models](https://arxiv.org/abs/2402.02370). It currently includes code implementations for the following tasks:
 
-> **[Time Series Forecasting](./scripts/multivariate_forecasting/)**: We repurpose large language models as out-of-box time series forecasters on benchmarks including long-term and short-term forecasting.
+> **[Time Series Forecasting](./scripts/time_series_forecasting/)**: We repurpose large language models as out-of-box time series forecasters on benchmarks including long-term and short-term forecasting.
 
-> **[Zero-shot Forecasting](./scripts/zeroshot_forecasting/)**: Large models exhibiting remarkable zero-shot capability are beneficial for data-scarce applications, where AutoTimes takes advantage of this and demonstrates good performance on scenarios without training samples.
+> **[Zero-shot Forecasting](./scripts/zero_shot_forecasting/)**: Large models exhibiting remarkable zero-shot capability are beneficial for data-scarce applications, where AutoTimes takes advantage of this and demonstrates good performance on scenarios without training samples.
 
-> **[In-context Forecasting](./scripts/in-context_forecasting/)**: We propose in-context forecasting in this paper, where instructions in time series itself are available to further enhance forecasting.
+> **[In-context Forecasting](./scripts/in_context_forecasting/)**: We propose in-context forecasting in this paper, where instructions in time series itself are available to further enhance forecasting.
 
-> **[Generality on Large Language Models](scripts/llm_generality)**: AutoTimes can be easily applied to various kinds of large language models, demonstrating generality and proper scaling behavior.
+> **[Generality on Large Language Models](scripts/method_generality)**: AutoTimes can be easily applied to various kinds of large language models, demonstrating generality and proper scaling behavior.
 
 # Updates
 
@@ -60,14 +60,14 @@ We provide several showcases comparing the zero-shot and in-context forecasting 
 pip install -r requirements.txt
 ```
 
-1. The datasets can be obtained from [Google Drive](#) or [Tsinghua Cloud](#).
+1. The datasets and corresponding precomputed text embedding can be obtained from [Google Drive](https://drive.google.com/file/d/1t7jOkctNJ0rt3VMwZaqmxSuA75TFEo96/view?usp=sharing) or [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/f/849427d3926f4fabbee7/).
 
-2. Download the large language models from [Hugging Face](#).
-   1. [GPT2](#)
+2. Download the large language models from [Hugging Face](https://huggingface.co/).
+   1. [GPT2](https://huggingface.co/openai-community/gpt2)
 
-   2. [OPT Family](#)
+   2. [OPT Family](https://huggingface.co/facebook/opt-125m)
 
-   3. [LLaMA-7B](#)
+   3. [LLaMA-7B](https://huggingface.co/meta-llama/Llama-2-7b)
 
 3. Train and evaluate the model. We provide all the above tasks under the folder ./scripts/.
 
@@ -81,15 +81,18 @@ bash ./scripts/time_series_forecasting/long-term_forecasting/AutoTimes_ETTh1.sh
 bash ./scripts/time_series_forecasting/short-term_forecasting/AutoTimes_M4.sh
 
 # zero-shot forecasting
-bash ./scripts/zeroshot_forecasting/sM4_tM3.sh
-bash ./scripts/zeroshot_forecasting/sM3_tM4.sh
+# It's worth mentioning that sM4_tM3 directly utilizes a model trained in the short-term. You should run the short-term first.
+bash ./scripts/zero_shot_forecasting/sM4_tM3.sh
+bash ./scripts/zero_shot_forecasting/sM3_tM4.sh
 
 # in-context forecasting
-bash ./scripts/in-context_forecasting/zeroshot_baseline.sh
-bash ./scripts/in-context_forecasting/in-context_forecasting.sh
+bash ./scripts/in-context_forecasting/in_context_forecasting.sh
 
 # other large language models
 bash ./scripts/method_generality/opt.sh
+
+# preprocess timestamps to generate text embedding
+python ./preprocess.py --gpu 0 --dataset ETTh1
 ```
 
 ## Zero-shot Forecasting
