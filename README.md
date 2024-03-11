@@ -95,6 +95,8 @@ bash ./scripts/method_generality/opt.sh
 python ./preprocess.py --gpu 0 --dataset ETTh1
 ```
 
+> Due to the simple tokenization and the frozen of LLM blocks, AutoTimes is highly applicable compared with other LLM4TS methods. For example, it requires only **15min** for AutoTime to repurpuse LLaMA-7B on ETTh1 on one single RTX 3090-24G.
+
 ## Zero-shot Forecasting
 
 We evaluate the performance under the zero-shot scenario, where the forecaster is first trained on a source domain and then directly evaluated on the unseen target domain.
@@ -113,7 +115,7 @@ AutoTimes can **also utilize the instructions in time series**, where we propose
 
 ## Time Series Forecasting
 
-AutoTimes demonstrates competitive performance in long-term and short-term scenarios. Notably, AutoTimes **adopts only one single model to tackle arbitrary forecast lengths by autoregression**, whereas other baselines necessitate training respectively on different lengths.
+AutoTimes demonstrates competitive performance in long-term and short-term scenarios. Notably, AutoTimes **adopts only one single model to tackle arbitrary forecast lengths by autoregression**, whereas other baselines necessitate training respectively on different lengths. And it is also notable that AutoTimes does not neccessiate elaborately designed language prompts.
 
 <p align="center">
 <img src="./figures/short-term_results.png" alt="" align=center />
