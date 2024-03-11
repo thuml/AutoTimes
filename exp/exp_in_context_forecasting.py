@@ -221,9 +221,9 @@ class Exp_In_Context_Forecast(Exp_Basic):
 
                 if self.args.use_amp:
                     with torch.cuda.amp.autocast():
-                        outputs = self.model(batch_x[:, -self.args.test_seq_len:, :], None, None, None)
+                        outputs = self.model(batch_x, None, None, None)
                 else:
-                    outputs = self.model(batch_x[:, -self.args.test_seq_len:, :], None, None, None)
+                    outputs = self.model(batch_x, None, None, None)
 
                 outputs = outputs[:, -self.args.test_pred_len:, :]
                 batch_y = batch_y[:, -self.args.test_pred_len:, :].to(self.device)

@@ -4,9 +4,9 @@ The repo is the official implementation for the paper: [AutoTimes: Autoregressiv
 
 > **[Time Series Forecasting](./scripts/time_series_forecasting/)**: We repurpose large language models as out-of-box time series forecasters on benchmarks including long-term and short-term forecasting.
 
-> **[Zero-shot Forecasting](./scripts/zeroshot_forecasting/)**: Large models exhibiting remarkable zero-shot capability are beneficial for data-scarce applications. AutoTimes takes advantage of this and demonstrates good performance without training samples.
+> **[Zero-shot Forecasting](./scripts/zero_shot_forecasting/)**: Large models exhibiting remarkable zero-shot capability are beneficial for data-scarce applications. AutoTimes takes advantage of this and demonstrates good performance without training samples.
 
-> **[In-context Forecasting](./scripts/in-context_forecasting/)**: We propose in-context forecasting for the first time, where instructions in time series itself are available to further enhance forecasting.
+> **[In-context Forecasting](./scripts/in_context_forecasting/)**: We propose in-context forecasting for the first time, where instructions in time series itself are available to further enhance forecasting.
 
 > **[Generality on Large Language Models](scripts/method_generality)**: AutoTimes can be easily applied to various kinds of large language models, demonstrating generality and proper scaling behavior.
 
@@ -63,7 +63,7 @@ pip install -r requirements.txt
 1. Put the datasets [[Google Drive]](https://drive.google.com/file/d/1t7jOkctNJ0rt3VMwZaqmxSuA75TFEo96/view?usp=sharing)
 [[Tsinghua Cloud]](https://cloud.tsinghua.edu.cn/f/849427d3926f4fabbee7/) under the folder ```./dataset/```.
 
-2. Download the large language models from [Hugging Face](https://huggingface.co/).
+2. Download the large language models from [Hugging Face](https://huggingface.co/) and specify the model path using the `llm_ckp_dir` parameter in scripts.
    * [GPT2](https://huggingface.co/openai-community/gpt2)
    * [OPT Family](https://huggingface.co/facebook/opt-125m)
    * [LLaMA-7B](https://huggingface.co/meta-llama/Llama-2-7b)

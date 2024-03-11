@@ -14,4 +14,3 @@ transformers==4.35.2
 accelerate
 sentencepiece
 protobuf
-transformers

@@ -16,7 +16,7 @@ class Model(nn.Module):
         self.llama = LlamaForCausalLM.from_pretrained(
             configs.llm_ckp_dir,
             device_map=self.device,
-            torch_dtype=torch.float16,
+            torch_dtype=torch.float16 if configs.use_amp else torch.float32,
         )
         self.hidden_dim_of_llama = 4096
         self.mix = configs.mix_embeds
