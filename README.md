@@ -46,13 +46,19 @@ We provide several showcases of zero-shot and in-context forecasting results.
 <img src="./figures/method.png" alt="" align=center />
 </p>
 
-#### Capability Comparsion
+### Capability
 
 <p align="center">
 <img src="./figures/comparison.png"  alt="" align=center />
 </p>
 
-#### Model Efficency Comparsion
+|            | Non-autoregressive                                           | Autoregressive                                               |
+| -------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
+| Training             | Trained with specific lookback-forecast lengths              | Trained with the context length with **each generated token being supervised** |
+| One-step Forecasting | Applicable only on fixed lookback-forecast lengths           | Flexible on scenarios **less than the context length** like large language models |
+| Rolling Forecasting  | Has to drop the lookback series because of the fixed input length | **Can prolong the lookback horizon** until the total length exceeds the context length |
+
+### Model Efficency
 
 | Method (Base LLM)    | Training Speed (s/iter) | Inference Speed (s/iter) | Params (Total \| Tunable) | MSE (ETT) |
 | -------------------- | :---------------------- | :----------------------- | :------------------------ | :-------- |
