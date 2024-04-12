@@ -60,7 +60,7 @@ We provide several showcases of zero-shot and in-context forecasting results.
 
 ### Model Efficency
 
-| Method (Base LLM)    | Training Speed (s/iter) | Inference Speed (s/iter) | Params (Total \| Tunable) | MSE (ETT) |
+| Method (Base LLM)    | Training Time (s/iter) | Inference Time (s/iter) | Params (Total \| Tunable) | MSE (ETT) |
 | -------------------- | :---------------------- | :----------------------- | :------------------------ | :-------- |
 | Time-LLM (LLaMA-7B)  | 1.896                   | 0.734                    | 6.65B \| 45.66M           | 0.362     |
 | AutoTimes (LLaMA-7B) | 0.354                   | 0.163                    | 6.61B \| 0.79M            | **0.360** |
