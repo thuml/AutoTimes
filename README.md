@@ -46,11 +46,22 @@ We provide several showcases of zero-shot and in-context forecasting results.
 <img src="./figures/method.png" alt="" align=center />
 </p>
 
-#### Comparsion with Other LLM4TS Methodology
+#### Capability Comparsion
 
 <p align="center">
 <img src="./figures/comparison.png"  alt="" align=center />
 </p>
+
+#### Model Efficency Comparsion
+
+| Method (Base LLM)    | Training Speed (s/iter) | Inference Speed (s/iter) | Params (Total \| Tunable) | MSE (ETT) |
+| -------------------- | :---------------------- | :----------------------- | :------------------------ | :-------- |
+| Time-LLM (LLaMA-7B)  | 1.896                   | 0.734                    | 6.65B \| 45.66M           | 0.362     |
+| AutoTimes (LLaMA-7B) | 0.354                   | 0.163                    | 6.61B \| 0.79M            | **0.360** |
+| FPT (GPT-2)          | 0.284                   | 0.133                    | 88.12M \| 7.01M           | 0.376     |
+| AutoTimes (GPT-2)    | 0.0350                  | 0.0223                   | 82.36M \| 0.44M           | **0.360** |
+| PatchTST             | 0.0206                  | 0.0085                   | 7.29M                     | 0.370     |
+| DLinear              | 0.0048                  | 0.0036                   | 0.13M                     | 0.375     |
 
 ## Usage 
 
