@@ -129,7 +129,7 @@ Benefiting from the time series prompts from the target domain, our LLM-based fo
 We evaluate the generality and model efficiency on alternative LLMs, demonstrating improved performance with the increase of parameters that **validates the scaling law**.
 
 <p align="center">
-<img src="./figures/llms.png" alt="" height = "300" align=center />
+<img src="./figures/alternative_llms.png" alt="" height = "300" align=center />
 </p>
 
 
@@ -138,7 +138,7 @@ We evaluate the generality and model efficiency on alternative LLMs, demonstrati
 Not only does AutoTime achieve more acurate predcitions but its training and reasoning time is also greatly reduced, bringing over 5× speedup on average.
 
 <p align="center">
-<img src="./figures/efficiency.png"  alt="" align=center />
+<img src="./figures/adaption_efficiency.png"  alt="" align=center />
 </p>
 
 
