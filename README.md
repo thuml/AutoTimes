@@ -13,7 +13,7 @@ The repo is the official implementation for the paper: [AutoTimes: Autoregressiv
 # Updates
 
 :triangular_flag_on_post: **News** (2024.5) We received lots of valuable suggestions. [A revised version](https://arxiv.org/pdf/2402.02370) (**22 Pages**) is now available, including elaboratedly describaed methodolgy, training costs, low-rank adaptation of our method.
-
+ 
 :triangular_flag_on_post: **News** (2024.2) All the scripts for the above tasks in our [paper](https://arxiv.org/pdf/2402.02370.pdf) are available in this repo.
 
 
