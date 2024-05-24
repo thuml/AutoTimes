@@ -2,72 +2,44 @@
 
 The repo is the official implementation for the paper: [AutoTimes: Autoregressive Time Series Forecasters via Large Language Models](https://arxiv.org/abs/2402.02370). It currently includes code implementations for the following tasks:
 
-> **[Time Series Forecasting](./scripts/time_series_forecasting/)**: We repurpose large language models as out-of-box time series forecasters on benchmarks including long-term and short-term forecasting.
+> **[Time Series Forecasting](./scripts/time_series_forecasting/)**: AutoTimes repurpose large language models as autoregressiove time series forecasters, which frees from training respectively on lookback lengths and allows arbitrary-length predictions with alleviated error accumulation
 
-> **[Zero-shot Forecasting](./scripts/zero_shot_forecasting/)**: Large models exhibiting remarkable zero-shot capability are beneficial for data-scarce applications. AutoTimes takes advantage of this and demonstrates good performance without training samples.
+> **[Zero-shot Forecasting](./scripts/zero_shot_forecasting/)**: Large Models exhibiting remarkable zero-shot capability. AutoTimes takes advantage of LLM's general-purposed token transition as the future extrapolation of time series, demonstrating good performance without downstream samples.
 
-> **[In-context Forecasting](./scripts/in_context_forecasting/)**: We propose in-context forecasting for the first time, where instructions in time series itself are available to further enhance forecasting.
+> **[In-context Forecasting](./scripts/in_context_forecasting/)**: We propose in-context forecasting to extend the context for prediction beyond the lookback window, where time series prompts can further incorporated into the context to enhance forecasting.
 
-> **[Generality on Large Language Models](scripts/method_generality)**: AutoTimes can be easily applied to various kinds of large language models, demonstrating generality and proper scaling behavior.
+> **[Generality and Scability of LLM](scripts/method_generality)**: AutoTimes is compatiable with any decoder-only large language models, demonstrating generality and proper scaling behavior.
 
 # Updates
+
+:triangular_flag_on_post: **News** (2024.5) We received lots of valuable suggestions. [A revised version](https://arxiv.org/pdf/2402.02370) (**22 Pages**) is now available, including elaboratedly describaed methodolgy, training costs, low-rank adaptation of our method.
 
 :triangular_flag_on_post: **News** (2024.2) All the scripts for the above tasks in our [paper](https://arxiv.org/pdf/2402.02370.pdf) are available in this repo.
 
 
-## Showcases
-
-We provide several showcases of zero-shot and in-context forecasting results.
-
-<p align="center">
-<img src="./figures/showcases.png" alt="" align=center />
-</p>
-
 
 ## Introduction
 
-🌟 While prevalent forecasting models adopt the encoder-only structure with projection, we propose AutoTimes, a simple but effective way to convert generative LLMs as **autoregressive forecasters** with frozen parameters. **Token-wise** Prompting is also proposed to incorporate textual information (e.g. timestamps).
+🌟 While prevalent LLM4TS methods adapt decoder-only and autoregressive
+LLMs as encoder-only and non-autoregressive forecasters, we propose to **keep consistent with the inherent autoregressive property and model architecture**.
 
 <p align="center">
 <img src="./figures/motivation.png"  alt="" align=center />
 </p>
 
-💪 We aim to **fully revitalize the capabilities of LLMs as foundation models of time series**, including autoregressive token generation, zero-shot capability, in-context learning, and multimodal utilization.
+💪 We aim to **fully revitalize the capabilities of LLMs as foundation models for time series forecasting**, including iterative multi-step forecasting, zero-shot capability, in-context forecasting, and multimodal utilization.
 
-🏆 AutoTimes demonstrate competitive results with existing baselines and have shown proficiency in **handling variable series lengths**: one model for all forecast lengths and gain with prolonged lookback.
+🏆 AutoTimes achieves **state-of-the-art performance** with **0.1% trainable parameters and over 5× training/inference speedup** compared to advanced LLM-based forecasters.
 
 ## Overall Approach
 
-* Establish the tokenization by the consistent training of Next Token Prediction.
-* Ultilize inherent token transitions within the frozen LLM blocks to predict time series tokens 
-* Prompted by textual covariates, such as timestamps aggregated in segments.
+* Time series and corresponding timestamps are segmented.
+* Textual timestamps are converted into the position embedding of segments.
+* AutoTimes learns to embed time series segments by next token prediction, where intermediate layers of LLM are frozen.
 
 <p align="center">
 <img src="./figures/method.png" alt="" align=center />
 </p>
-
-### Capability
-
-<p align="center">
-<img src="./figures/comparison.png"  alt="" align=center />
-</p>
-
-|            | Non-autoregressive                                           | Autoregressive                                               |
-| -------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
-| Training             | Trained with specific lookback-forecast lengths              | Trained with the context length with **each generated token being supervised** |
-| One-step Forecasting | Applicable only on fixed lookback-forecast lengths           | Flexible on scenarios **less than the context length** like large language models |
-| Rolling Forecasting  | Has to drop the lookback series because of the fixed input length | **Can prolong the lookback horizon** until the total length exceeds the context length |
-
-### Model Efficency
-
-| Method (Base LLM)    | Training Time (s/iter) | Inference Time (s/iter) | Params (Total \| Tunable) | MSE (ETT) |
-| -------------------- | :---------------------- | :----------------------- | :------------------------ | :-------- |
-| Time-LLM (LLaMA-7B)  | 1.896                   | 0.734                    | 6.65B \| 45.66M           | 0.362     |
-| AutoTimes (LLaMA-7B) | 0.354                   | 0.163                    | 6.61B \| 0.79M            | **0.360** |
-| FPT (GPT-2)          | 0.284                   | 0.133                    | 88.12M \| 7.01M           | 0.376     |
-| AutoTimes (GPT-2)    | 0.0350                  | 0.0223                   | 82.36M \| 0.44M           | **0.360** |
-| PatchTST             | 0.0206                  | 0.0085                   | 7.29M                     | 0.370     |
-| DLinear              | 0.0048                  | 0.0036                   | 0.13M                     | 0.375     |
 
 ## Usage 
 
@@ -114,9 +86,31 @@ python ./preprocess.py --gpu 0 --dataset ETTh1
 
 > Due to the simple tokenization and the frozen of LLM blocks, AutoTimes is highly applicable compared with other LLM4TS methods. For example, it requires only **15min** for AutoTime to repurpuse LLaMA-7B on ETTh1 on one single RTX 3090-24G.
 
+
+## Capability
+
+<p align="center">
+<img src="./figures/comparison.png"  alt="" align=center />
+</p>
+
+|            | Non-autoregressive                                           | Autoregressive                                               |
+| -------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
+| Training             | Trained with specific lookback-forecast lengths              | Trained with the context length with **each generated token being supervised** |
+| One-step Forecasting | Applicable only on fixed lookback-forecast lengths           | Flexible on scenarios **less than the context length** like large language models |
+| Rolling Forecasting  | Has to drop the lookback series because of the fixed input length | **Can prolong the lookback horizon** until the total length exceeds the context length |
+
+## Time Series Forecasting
+
+Towards the vertility of foundation models, we establish a novel **one-for-all** benchmark: a single forecaster is trained on one dataset and subsequently utilized for all prediction lengths, where we achieve SOTA results in **80%** datasets. In the conventional **one-for-one** scenario, AutoTimes still achieved state-of-the-art performance in **70%** of settings without respective training.
+
+
+<p align="center">
+<img src="./figures/one-for-all_results.png" alt="" align=center />
+</p>
+
 ## Zero-shot Forecasting
 
-We evaluate the performance under the zero-shot scenario, where the forecaster is first trained on a source domain and then directly evaluated on the unseen target domain.
+We evaluate the performance under the transfer learning scenario, where the forecaster is first trained on a source domain and then directly evaluated on the unseen target domain.
 
 <p align="center">
 <img src="./figures/zeroshot_results.png" alt="" align=center />
@@ -124,47 +118,64 @@ We evaluate the performance under the zero-shot scenario, where the forecaster i
 
 ## In-context Forecasting
 
-AutoTimes can **also utilize the instructions in time series**, where we propose **in-context forecasting**. Inspired by In-Context Learning of LLMs, we provide forecasting demonstration from the target domain as the prompt. The composed **time series sentence** is fed into our forecaster, which effectively empowers the prediction.
+Benefiting from the time series prompts from the target domain, our LLM-based forecaster with the proposed in-context forecasting paradigm achieves consistent promotions on all M3 subsets and the averaged **13.3%** SMAPE reduction compared with zero-shot forecasting.
 
 <p align="center">
 <img src="./figures/in-context.png" alt="" align=center />
 </p>
 
-## Time Series Forecasting
-
-AutoTimes demonstrates competitive performance in long-term and short-term scenarios. Notably, AutoTimes **adopts only one single model to tackle arbitrary forecast lengths by autoregression**, whereas other baselines necessitate training respectively on different lengths. And it is also notable that AutoTimes does not neccessiate elaborately designed language prompts.
-
-<p align="center">
-<img src="./figures/short-term_results.png" alt="" align=center />
-</p>
-
 ## Model Generality
 
-We evaluate the efficiency of each repurposed LLM from three perspectives: forecasting performance, training speed, and parameters, demonstrating improved performance with the increase of parameters that **validates the scaling law**.
+We evaluate the generality and model efficiency on alternative LLMs, demonstrating improved performance with the increase of parameters that **validates the scaling law**.
 
 <p align="center">
 <img src="./figures/llms.png" alt="" height = "300" align=center />
 </p>
 
-## Prompting Ablation
 
-We conduct the ablation on Token-wise Prompting by integrating timestamps. The performance is **consistently promoted by the datetime information** across all datasets and forecasting lengths.
+## Method Efficency
+
+Not only does AutoTime achieve more acurate predcitions but its training and reasoning time is also greatly reduced, bringing over 5× speedup on average.
+
+<p align="center">
+<img src="./figures/efficiency.png"  alt="" align=center />
+</p>
+
+
+## Textual Timestamps as Position Embedding
+
+We conduct ablations our position embedding of textual timestamps. The performance is consistently promoted because of better alignment of mutlvariate time series segments.
 
 <p align="center">
 <img src="./figures/ablation.png" alt="" align=center />
 </p>
 
-## Prolonged Lookbacks
+## Flexible Input Length
 
-As language models can generally give more accurate answers with a longer context, **the performance of AutoTimes is generally improving with the more available lookback observations**, which is highly desired in real-world applications.
+In the conventional forecasting paradigm, deep forecasters are trained respectively, limiting their applicability to a single lookback length. In contrast, our forecasters have the versatility to handle various input lengths with one model.
 
-## Parameter Efficiency
+<p align="center">
+<img src="./figures/lookback.png" alt="" align=center />
+</p>
 
-Despite LLM having a substantial amount of parameters, AutoTimes requires only minimal parameters (**up to 0.1%**) for training, acomplished by a single pair of MLPs for time series tokenization as the plugin of LLMs.
+## Low-rank Adaption
 
-## Training on Custom Data
+By further incorporating [LoRA](https://arxiv.org/abs/2106.09685), the token transition of LLMs can be better aligned to the time series modality with improved performance.
 
-Tutorials are provided in this [repo](https://github.com/thuml/iTransformer/tree/main/scripts/multivariate_forecasting).
+
+<p align="center">
+<img src="./figures/lora.png" alt="" align=center />
+</p>
+
+## Showcases
+
+<p align="center">
+<img src="./figures/showcases_more.png" alt="" align=center />
+</p>
+
+<p align="center">
+<img src="./figures/showcases.png" alt="" align=center />
+</p>
 
 
 ## Citation
