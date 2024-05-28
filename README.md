@@ -6,7 +6,7 @@ The repo is the official implementation for the paper: [AutoTimes: Autoregressiv
 
 > **[Zero-shot Forecasting](./scripts/zero_shot_forecasting/)**: Large Models exhibiting remarkable zero-shot capability. AutoTimes takes advantage of LLM's general-purposed token transition as the future extrapolation of time series, demonstrating good performance without downstream samples.
 
-> **[In-context Forecasting](./scripts/in_context_forecasting/)**: We propose in-context forecasting to extend the context for prediction beyond the lookback window, where time series prompts can further incorporated into the context to enhance forecasting.
+> **[In-context Forecasting](./scripts/in_context_forecasting/)**: We propose in-context forecasting for the first time to extend the context for prediction beyond the lookback window, where time series prompts can further incorporated into the context to enhance forecasting.
 
 > **[Generality and Scability of LLM](scripts/method_generality)**: AutoTimes is compatiable with any decoder-only large language models, demonstrating generality and proper scaling behavior.
 
