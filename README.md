@@ -27,7 +27,7 @@ LLMs as encoder-only and non-autoregressive forecasters, we propose to **keep co
 <img src="./figures/motivation.png"  alt="" align=center />
 </p>
 
-💪 We aim to **fully revitalize the capabilities of LLMs as foundation models for time series forecasting**, including iterative multi-step forecasting, zero-shot capability, in-context forecasting, and multimodal utilization.
+💪 We aim to **fully revitalize the capabilities of LLMs as foundation models for time series forecasting**, including iterative multi-step forecasting, zero-shot capability, **in-context forecasting**, and multimodal utilization.
 
 🏆 AutoTimes achieves **state-of-the-art performance** with **0.1% trainable parameters and over 5× training/inference speedup** compared to advanced LLM-based forecasters.
 
