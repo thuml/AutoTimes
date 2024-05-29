@@ -1,4 +1,4 @@
-# AutoTimes
+# AutoTimes (Large Language Models for Time Series Forecasting)
 
 The repo is the official implementation for the paper: [AutoTimes: Autoregressive Time Series Forecasters via Large Language Models](https://arxiv.org/abs/2402.02370). It currently includes code implementations for the following tasks:
 
