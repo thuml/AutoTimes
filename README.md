@@ -144,7 +144,7 @@ Not only does AutoTime achieve more acurate predcitions but its training and rea
 
 ## Textual Timestamps as Position Embedding
 
-We conduct ablations our position embedding of textual timestamps. The performance is consistently promoted because of better alignment of mutlvariate time series segments.
+We conduct ablations our position embedding of textual timestamps. The performance is consistently promoted because of better positional alignment of multivariate time series segments.
 
 <p align="center">
 <img src="./figures/ablation.png" alt="" align=center />
