@@ -2,7 +2,7 @@
 
 The repo is the official implementation for the paper: [AutoTimes: Autoregressive Time Series Forecasters via Large Language Models](https://arxiv.org/abs/2402.02370). It currently includes code implementations for the following tasks:
 
-> **[Time Series Forecasting](./scripts/time_series_forecasting/)**: AutoTimes repurpose large language models as autoregressiove time series forecasters, which frees from training respectively on lookback lengths and allows arbitrary-length predictions with alleviated error accumulation
+> **[Time Series Forecasting](./scripts/time_series_forecasting/)**: AutoTimes repurpose large language models as autoregressive multivariate time series forecasters, which frees from training respectively on lookback lengths and allows arbitrary-length predictions with alleviated error accumulation
 
 > **[Zero-shot Forecasting](./scripts/zero_shot_forecasting/)**: Large Models exhibiting remarkable zero-shot capability. AutoTimes takes advantage of LLM's general-purposed token transition as the future extrapolation of time series, demonstrating good performance without downstream samples.
 
