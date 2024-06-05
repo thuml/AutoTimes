@@ -133,7 +133,7 @@ We evaluate the generality and model efficiency on alternative LLMs, demonstrati
 </p>
 
 
-## Method Efficency
+## Method Efficiency
 
 Not only does AutoTime achieve more acurate predcitions but its training and reasoning time is also greatly reduced, bringing over 5× speedup on average.
 
