@@ -16,8 +16,6 @@ The repo is the official implementation for the paper: [AutoTimes: Autoregressiv
  
 :triangular_flag_on_post: **News** (2024.2) All the scripts for the above tasks in our [paper](https://arxiv.org/pdf/2402.02370.pdf) are available in this repo.
 
-
-
 ## Introduction
 
 🌟 While prevalent LLM4TS methods adapt decoder-only and autoregressive
@@ -31,16 +29,6 @@ LLMs as encoder-only and non-autoregressive forecasters, we propose to **keep co
 
 🏆 AutoTimes achieves **state-of-the-art performance** with **0.1% trainable parameters and over 5× training/inference speedup** compared to advanced LLM-based forecasters.
 
-## Overall Approach
-
-* Time series and corresponding timestamps are segmented.
-* Textual timestamps are converted into the position embedding of segments.
-* AutoTimes learns to embed time series segments by next token prediction, where intermediate layers of LLM are frozen.
-
-<p align="center">
-<img src="./figures/method.png" alt="" align=center />
-</p>
-
 ## Usage 
 
 1. Install Pytorch and necessary dependencies.
@@ -53,11 +41,16 @@ pip install -r requirements.txt
 [[Tsinghua Cloud]](https://cloud.tsinghua.edu.cn/f/849427d3926f4fabbee7/) under the folder ```./dataset/```.
 
 2. Download the large language models from [Hugging Face](https://huggingface.co/) and specify the model path using the `llm_ckp_dir` parameter in scripts.
-   * [GPT2](https://huggingface.co/openai-community/gpt2)
-   * [OPT Family](https://huggingface.co/facebook/opt-125m)
    * [LLaMA-7B](https://huggingface.co/meta-llama/Llama-2-7b)
+   * [OPT Family](https://huggingface.co/facebook/opt-125m)
+   * [GPT2](https://huggingface.co/openai-community/gpt2)
+3. Generate the position embedding from textual timestampes.
+```
+# preprocess timestamps to generate text embedding
+python ./preprocess.py --gpu 0 --dataset ETTh1
+```
 
-3. Train and evaluate the model. We provide all the above tasks under the folder ```./scripts/```.
+1. Train and evaluate the model. We provide all the above tasks under the folder ```./scripts/```.
 
 ```
 # the default large language model is LLaMA-7B
@@ -77,15 +70,22 @@ bash ./scripts/zero_shot_forecasting/sM3_tM4.sh
 # in-context forecasting
 bash ./scripts/in_context_forecasting/M3.sh
 
-# other large language models
+# try on other large language models
 bash ./scripts/method_generality/opt.sh
-
-# preprocess timestamps to generate text embedding
-python ./preprocess.py --gpu 0 --dataset ETTh1
 ```
 
 > Due to the simple tokenization and the frozen of LLM blocks, AutoTimes is highly applicable compared with other LLM4TS methods. For example, it requires only **15min** for AutoTime to repurpuse LLaMA-7B on ETTh1 on one single RTX 3090-24G.
 
+
+## Overall Approach
+
+* Time series and corresponding timestamps are segmented.
+* Textual timestamps are converted into the position embedding of segments.
+* AutoTimes learns to embed time series segments by next token prediction, where intermediate layers of LLM are frozen.
+
+<p align="center">
+<img src="./figures/method.png" alt="" align=center />
+</p>
 
 ## Capability
 
@@ -132,7 +132,6 @@ We evaluate the generality and model efficiency on alternative LLMs, demonstrati
 <img src="./figures/alternative_llms.png" alt="" height = "300" align=center />
 </p>
 
-
 ## Method Efficiency
 
 Not only does AutoTime achieve more acurate predcitions but its training and reasoning time is also greatly reduced, bringing over 5× speedup on average.
@@ -140,7 +139,6 @@ Not only does AutoTime achieve more acurate predcitions but its training and rea
 <p align="center">
 <img src="./figures/adaption_efficiency.png"  alt="" align=center />
 </p>
-
 
 ## Textual Timestamps as Position Embedding
 
@@ -162,7 +160,6 @@ In the conventional forecasting paradigm, deep forecasters are trained respectiv
 
 By further incorporating [LoRA](https://arxiv.org/abs/2106.09685), the token transition of LLMs can be better aligned to the time series modality with improved performance.
 
-
 <p align="center">
 <img src="./figures/lora.png" alt="" align=center />
 </p>
@@ -176,7 +173,6 @@ By further incorporating [LoRA](https://arxiv.org/abs/2106.09685), the token tra
 <p align="center">
 <img src="./figures/showcases.png" alt="" align=center />
 </p>
-
 
 ## Citation
 

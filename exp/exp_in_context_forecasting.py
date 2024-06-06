@@ -11,6 +11,12 @@ import time
 import warnings
 import numpy as np
 
+# In our in-context learning setting
+# the task is to apply a forecaster, trained on a source dataset, to an unseen target dataset
+# Additionally, several task demonstrations from the target domain, 
+# referred to as time series prompts are available during inference
+# Concretely, AutoTimes trains LLMs on the source domain with a larger context length to place the additional time series prompt. 
+# See ```Dataset_TSF_ICL``` in ```data_loader.py``` for the construction of time series prompts
 
 warnings.filterwarnings('ignore')
 
@@ -93,7 +99,7 @@ class Exp_In_Context_Forecast(Exp_Basic):
             for i, (batch_x, batch_y, batch_x_mark, batch_y_mark) in enumerate(train_loader):
                 iter_count += 1
                 model_optim.zero_grad()
-                batch_x = batch_x.float().to(self.device)
+                batch_x = batch_x.float().to(self.device) 
 
                 batch_y = batch_y.float().to(self.device)
                 batch_y_mark = batch_y_mark.float().to(self.device)
@@ -158,7 +164,7 @@ class Exp_In_Context_Forecast(Exp_Basic):
         with torch.no_grad():
             # decoder input
             B, _, C = x.shape
-
+            
             outputs = torch.zeros((B, self.args.seq_len, C)).float()  # .to(self.device)
             id_list = np.arange(0, B, 500)  # validation set size
             id_list = np.append(id_list, B)

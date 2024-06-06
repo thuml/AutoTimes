@@ -387,7 +387,6 @@ class Dataset_TSF_ICL(Dataset):
         self.data_path = data_path
         self.timeseries = self.__read_data__()
 
-
     def __read_data__(self):
         df, _, _, _, _ = convert_tsf_to_dataframe(os.path.join(self.root_path, self.data_path))
         def dropna(x):
@@ -396,6 +395,7 @@ class Dataset_TSF_ICL(Dataset):
         timeseries = [ts for ts in timeseries if ts.shape[0] > self.context_len]
         return timeseries
 
+    # we uniformly adopting the first time points of the time series as the corresponding prompt.
     def __getitem__(self, index):        
         data_x1 = self.timeseries[index][:2*self.token_len]
         data_x2 = self.timeseries[index][-2*self.token_len:-1*self.token_len]
