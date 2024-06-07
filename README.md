@@ -1,6 +1,6 @@
 # AutoTimes (Large Language Models for Time Series Forecasting)
 
-The repo is the official implementation for the paper: [AutoTimes: Autoregressive Time Series Forecasters via Large Language Models](https://arxiv.org/abs/2402.02370).\
+The repo is the official implementation: [AutoTimes: Autoregressive Time Series Forecasters via Large Language Models](https://arxiv.org/abs/2402.02370).
 
 > **[Time Series Forecasting](./scripts/time_series_forecasting/)**: AutoTimes repurpose LLMs as autoregressive multivariate time series forecasters, which frees from training respectively on lookback/forecast lengths.
 
@@ -18,13 +18,13 @@ The repo is the official implementation for the paper: [AutoTimes: Autoregressiv
 
 ## Introduction
 
-🌟 While prevalent LLM4TS methods adapt decoder-only and autoregressive LLMs as encoder-only and non-autoregressive forecasters, we propose to **keep consistent with the inherent autoregressive property and model architecture**.
+🌟 While prevalent LLM4TS methods adapt LLMs as encoder-only and non-autoregressive forecasters, we propose to **keep consistent with the inherent autoregressive property and model architecture**.
 
 <p align="center">
 <img src="./figures/motivation.png"  alt="" align=center />
 </p>
 
-💪 We aim to **fully revitalize the capabilities of LLMs as foundation models for time series forecasting**, including iterative multi-step forecasting, zero-shot capability, **in-context forecasting**, and multimodal utilization.
+💪 We aim to **fully revitalize LLMs as foundation models for time series forecasting**, including multi-step forecasting, zero-shot capability, **in-context forecasting**, and multimodal utilization.
 
 🏆 AutoTimes achieves **state-of-the-art performance** with **0.1% trainable parameters and over 5× training/inference speedup** compared to advanced LLM-based forecasters.
 
@@ -73,7 +73,7 @@ bash ./scripts/in_context_forecasting/M3.sh
 bash ./scripts/method_generality/opt.sh
 ```
 
-> Due to the simple tokenization and the frozen of LLM blocks, AutoTimes is highly applicable compared with other LLM4TS methods. For example, it requires only **15min** for AutoTime to repurpuse LLaMA-7B on ETTh1 on one single RTX 3090-24G.
+> Due to the simple tokenization and the frozen of LLM blocks, AutoTimes is highly compatiable with LLMs. For example, it requires only **15min** for AutoTime to repurpuse LLaMA-7B on ETTh1 on one single RTX 3090-24G.
 
 
 ## Overall Approach
@@ -100,7 +100,7 @@ bash ./scripts/method_generality/opt.sh
 
 ## Time Series Forecasting
 
-Towards the vertility of foundation models, we establish a novel **one-for-all** benchmark: a single forecaster is trained on one dataset and subsequently utilized for all prediction lengths, where we achieve SOTA results in **80%** datasets. In the conventional **one-for-one** scenario, AutoTimes still achieved state-of-the-art performance in **70%** of settings without respective training.
+Towards the vertility of foundation models, we establish a novel **one-for-all** benchmark: a single forecaster is trained on one dataset and subsequently utilized for all prediction lengths, where we achieve SOTA results in **80%** datasets. In the conventional **one-for-one** scenario, AutoTimes still achieved state-of-the-art performance in **70%** of settings.
 
 
 <p align="center">
@@ -109,7 +109,7 @@ Towards the vertility of foundation models, we establish a novel **one-for-all**
 
 ## Zero-shot Forecasting
 
-We evaluate the performance under the transfer learning scenario, where the forecaster is first trained on a source domain and then directly evaluated on the unseen target domain.
+We evaluate the performance under the transfer learning scenario, where the forecaster is first trained on a source domain and then evaluated on the unseen target domain.
 
 <p align="center">
 <img src="./figures/zeroshot_results.png" alt="" align=center />
@@ -117,7 +117,7 @@ We evaluate the performance under the transfer learning scenario, where the fore
 
 ## In-context Forecasting
 
-Benefiting from the time series prompts from the target domain, our LLM-based forecaster with the proposed in-context forecasting paradigm achieves consistent promotions on all M3 subsets and the averaged **13.3%** SMAPE reduction compared with zero-shot forecasting.
+Benefiting from time series prompts from the target domain, LLM-based forecaster can achieves consistent promotions on all M3 subsets and the averaged **13.3%** SMAPE reduction compared with zero-shot forecasting.
 
 <p align="center">
 <img src="./figures/in-context.png" alt="" align=center />
@@ -125,7 +125,7 @@ Benefiting from the time series prompts from the target domain, our LLM-based fo
 
 ## Model Generality
 
-We evaluate the generality and model efficiency on alternative LLMs, demonstrating improved performance with the increase of parameters that **validates the scaling law**.
+We evaluate the generality and efficiency on other LLMs, demonstrating improved performance with the increase of parameters that **validates the scaling law**.
 
 <p align="center">
 <img src="./figures/alternative_llms.png" alt="" height = "300" align=center />
@@ -141,7 +141,7 @@ Not only does AutoTime achieve more acurate predcitions but its training and rea
 
 ## Textual Timestamps as Position Embedding
 
-We conduct ablations our position embedding of textual timestamps. The performance is consistently promoted because of better positional alignment of multivariate time series segments.
+We conduct ablations our position embedding of textual timestamps. The performance is consistently promoted because of the positional alignment of multivariate time series.
 
 <p align="center">
 <img src="./figures/ablation.png" alt="" align=center />
@@ -149,7 +149,7 @@ We conduct ablations our position embedding of textual timestamps. The performan
 
 ## Flexible Input Length
 
-In the conventional forecasting paradigm, deep forecasters are trained respectively, limiting their applicability to a single lookback length. In contrast, our forecasters have the versatility to handle various input lengths with one model.
+In the conventional paradigm, deep forecasters are trained respectively, limiting their versatility. In contrast, our forecasters handle various input lengths with one model.
 
 <p align="center">
 <img src="./figures/lookback.png" alt="" align=center />
@@ -157,7 +157,7 @@ In the conventional forecasting paradigm, deep forecasters are trained respectiv
 
 ## Low-rank Adaption
 
-By further incorporating [LoRA](https://arxiv.org/abs/2106.09685), the token transition of LLMs can be better aligned to the time series modality with improved performance.
+By incorporating [LoRA](https://arxiv.org/abs/2106.09685), the token transition of LLMs can be better aligned to the time series modality with improved performance.
 
 <p align="center">
 <img src="./figures/lora.png" alt="" align=center />
