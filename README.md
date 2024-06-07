@@ -1,25 +1,24 @@
 # AutoTimes (Large Language Models for Time Series Forecasting)
 
-The repo is the official implementation for the paper: [AutoTimes: Autoregressive Time Series Forecasters via Large Language Models](https://arxiv.org/abs/2402.02370). It currently includes code implementations for the following tasks:
+The repo is the official implementation for the paper: [AutoTimes: Autoregressive Time Series Forecasters via Large Language Models](https://arxiv.org/abs/2402.02370).\
 
-> **[Time Series Forecasting](./scripts/time_series_forecasting/)**: AutoTimes repurpose large language models as autoregressive multivariate time series forecasters, which frees from training respectively on lookback lengths and allows arbitrary-length predictions with alleviated error accumulation
+> **[Time Series Forecasting](./scripts/time_series_forecasting/)**: AutoTimes repurpose LLMs as autoregressive multivariate time series forecasters, which frees from training respectively on lookback/forecast lengths.
 
-> **[Zero-shot Forecasting](./scripts/zero_shot_forecasting/)**: Large Models exhibiting remarkable zero-shot capability. AutoTimes takes advantage of LLM's general-purposed token transition as the future extrapolation of time series, demonstrating good performance without downstream samples.
+> **[Zero-shot Forecasting](./scripts/zero_shot_forecasting/)**: AutoTimes takes advantage of LLM's general-purposed token transition as the future extrapolation of time series, demonstrating good performance without downstream samples.
 
-> **[In-context Forecasting](./scripts/in_context_forecasting/)**: We propose in-context forecasting for the first time to extend the context for prediction beyond the lookback window, where time series prompts can further incorporated into the context to enhance forecasting.
+> **[In-context Forecasting](./scripts/in_context_forecasting/)**: We propose in-context forecasting for the first time, where time series prompts can further incorporated into the context to enhance forecasting.
 
-> **[Generality and Scability of LLM](scripts/method_generality)**: AutoTimes is compatiable with any decoder-only large language models, demonstrating generality and proper scaling behavior.
+> **[Easy-to-use](scripts/method_generality)**: AutoTimes is compatiable with any decoder-only large language models, demonstrating generality and proper scaling behavior.
 
 # Updates
 
-:triangular_flag_on_post: **News** (2024.5) We received lots of valuable suggestions. [A revised version](https://arxiv.org/pdf/2402.02370) (**22 Pages**) is now available, further including elaboratedly described methodolgy, training costs, low-rank adaptation of our method.
+:triangular_flag_on_post: **News** (2024.5) We received lots of valuable suggestions. [A revised version](https://arxiv.org/pdf/2402.02370) (**22 Pages**) is now available, including elaboratedly described methodolgy, training costs, low-rank adaptation of our method.
  
-:triangular_flag_on_post: **News** (2024.2) All the scripts for the above tasks in our [paper](https://arxiv.org/pdf/2402.02370.pdf) are available in this repo.
+:triangular_flag_on_post: **News** (2024.2) Scripts for the above tasks in our [paper](https://arxiv.org/pdf/2402.02370.pdf) are available in this repo.
 
 ## Introduction
 
-🌟 While prevalent LLM4TS methods adapt decoder-only and autoregressive
-LLMs as encoder-only and non-autoregressive forecasters, we propose to **keep consistent with the inherent autoregressive property and model architecture**.
+🌟 While prevalent LLM4TS methods adapt decoder-only and autoregressive LLMs as encoder-only and non-autoregressive forecasters, we propose to **keep consistent with the inherent autoregressive property and model architecture**.
 
 <p align="center">
 <img src="./figures/motivation.png"  alt="" align=center />
