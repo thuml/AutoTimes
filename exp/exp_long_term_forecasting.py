@@ -267,13 +267,16 @@ class Exp_Long_Term_Forecast(Exp_Basic):
                         iter_count = 0
                         time_now = time.time()
                     
-                if self.args.visualize and i % 2 == 0:
+                if self.args.visualize and i == 0:
                     gt = np.array(true[0, :, -1])
                     pd = np.array(pred[0, :, -1])
+                    lookback = batch_x[0, :, -1].detach().cpu().numpy()
+                    gt = np.concatenate([lookback, gt], axis=0)
+                    pd = np.concatenate([lookback, pd], axis=0)
                     dir_path = folder_path + f'{self.args.test_pred_len}/'
                     if not os.path.exists(dir_path):
                         os.makedirs(dir_path)
-                    visual(gt, pd, os.path.join(dir_path, f'{i}.pdf'))
+                    visual(gt, pd, os.path.join(dir_path, f'{i}.png'))
         
         preds = torch.cat(preds, dim=0).numpy()
         trues = torch.cat(trues, dim=0).numpy()
