@@ -75,6 +75,8 @@ bash ./scripts/method_generality/opt.sh
 
 > Due to the simple tokenization and the frozen of LLM blocks, AutoTimes is highly compatiable with LLMs. For example, it requires only **15min** for AutoTime to repurpuse LLaMA-7B on ETTh1 on one single RTX 3090-24G.
 
+### A Simple Example
+See predict.ipynb for workflow (in Chinese).
 
 ## Overall Approach
 
