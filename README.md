@@ -1,5 +1,9 @@
 # AutoTimes (Large Language Models for Time Series Forecasting)
 
+<p align="center">
+<img src="./figures/illustration.png"  alt="" align=center />
+</p>
+
 The repo is the official implementation: [AutoTimes: Autoregressive Time Series Forecasters via Large Language Models](https://arxiv.org/abs/2402.02370).
 
 > **[Time Series Forecasting](./scripts/time_series_forecasting/)**: AutoTimes repurpose LLMs as autoregressive multivariate time series forecasters, which frees from training respectively on lookback/forecast lengths.
