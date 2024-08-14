@@ -48,7 +48,7 @@ pip install -r requirements.txt
    * [OPT Family](https://huggingface.co/facebook/opt-125m)
    * [GPT2](https://huggingface.co/openai-community/gpt2)
 
-   For example, if you download LLaMA successfully, the directory structure is as follows:
+   For example, if you download and put the LLaMA directory successfully, the directory structure is as follows:
    - data_provider
    - dataset
    - run.py
