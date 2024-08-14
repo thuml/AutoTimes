@@ -43,17 +43,17 @@ pip install -r requirements.txt
 1. Put the datasets [[Google Drive]](https://drive.google.com/file/d/1t7jOkctNJ0rt3VMwZaqmxSuA75TFEo96/view?usp=sharing)
 [[Tsinghua Cloud]](https://cloud.tsinghua.edu.cn/f/849427d3926f4fabbee7/) under the folder ```./dataset/```.
 
-2. Download the large language models from [Hugging Face](https://huggingface.co/) and specify the model path using the `llm_ckp_dir` parameter in scripts.
+2. Download the large language models from [Hugging Face](https://huggingface.co/). The default LLM is LLaMA-7B, you can change the `llm_ckp_dir` in `run.py` to use other LLMs.
    * [LLaMA-7B](https://huggingface.co/meta-llama/Llama-2-7b)
    * [OPT Family](https://huggingface.co/facebook/opt-125m)
    * [GPT2](https://huggingface.co/openai-community/gpt2)
-3. Generate the position embedding from textual timestampes.
+3. [Optional]: Generate the position embedding from textual timestamps.
 ```
 # preprocess timestamps to generate text embedding
 python ./preprocess.py --gpu 0 --dataset ETTh1
 ```
 
-1. Train and evaluate the model. We provide all the above tasks under the folder ```./scripts/```.
+4. Train and evaluate the model. We provide all the above tasks under the folder ```./scripts/```.
 
 ```
 # the default large language model is LLaMA-7B
