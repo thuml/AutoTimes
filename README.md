@@ -47,7 +47,20 @@ pip install -r requirements.txt
    * [LLaMA-7B](https://huggingface.co/meta-llama/Llama-2-7b)
    * [OPT Family](https://huggingface.co/facebook/opt-125m)
    * [GPT2](https://huggingface.co/openai-community/gpt2)
-3. [Optional]: Generate the position embedding from textual timestamps.
+
+   For example, if you download LLaMA successfully, the directory structure is as follows:
+   - data_provider
+   - dataset
+   - run.py
+   - llama
+     - config.json
+     - pytorch_model-00001-of-00002.bin
+     - pytorch_model-00002-of-00002.bin
+     - ...
+   - ...
+
+
+3. [Optional] Generate the position embedding from textual timestamps and add `--mix_embeds` in the corresponding script.
 ```
 # preprocess timestamps to generate text embedding
 python ./preprocess.py --gpu 0 --dataset ETTh1

@@ -21,7 +21,7 @@ torchrun --nnodes 1 --nproc-per-node 8 run.py \
   --mlp_hidden_dim 1024 \
   --train_epochs 10 \
   --use_amp \
-  --mix_embeds \
+  # --mix_embeds \
   --use_multi_gpu \
   --tmax 10 \
   --cosine
@@ -49,7 +49,7 @@ python -u run.py \
   --mlp_hidden_dim 1024 \
   --train_epochs 10 \
   --use_amp \
-  --mix_embeds \
+  # --mix_embeds \
   --tmax 10 \
   --cosine \
   --test_dir long_term_forecast_ECL_672_96_AutoTimes_Llama_custom_sl672_ll576_tl96_lr0.001_bt256_wd1e-05_hd1024_hl2_cosTrue_mixTrue_test_0
