@@ -24,7 +24,7 @@ torchrun --nnodes 1 --nproc-per-node 8 run.py \
   --use_amp \
   --cosine \
   --tmax 10 \
-  # --mix_embeds \
+  --mix_embeds \
   --use_multi_gpu
 
 # testing the model on all forecast lengths
@@ -54,6 +54,6 @@ python -u run.py \
   --gpu 0 \
   --cosine \
   --tmax 10 \
-  # --mix_embeds \
+  --mix_embeds \
   --test_dir long_term_forecast_traffic_672_96_AutoTimes_Llama_custom_sl672_ll576_tl96_lr0.0001_bt256_wd1e-05_hd1024_hl2_cosTrue_mixTrue_test_0
 done

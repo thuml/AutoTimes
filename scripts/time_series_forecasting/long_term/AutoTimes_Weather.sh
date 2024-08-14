@@ -24,7 +24,7 @@ torchrun --nnodes 1 --nproc-per-node 4 run.py \
   --mlp_hidden_dim 512 \
   --mlp_activation relu \
   --use_multi_gpu \
-  # --mix_embeds
+  --mix_embeds
 
 # testing the model on all forecast lengths
 for test_pred_len in 96 192 336 720
@@ -51,6 +51,6 @@ python -u run.py \
   --des 'Exp' \
   --mlp_hidden_dim 512 \
   --mlp_activation relu \
-  # --mix_embeds \
+  --mix_embeds \
   --test_dir long_term_forecast_weather_672_96_AutoTimes_Llama_custom_sl672_ll576_tl96_lr0.0005_bt384_wd0_hd512_hl2_cosFalse_mixTrue_Exp_0
 done

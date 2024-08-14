@@ -23,7 +23,7 @@ python -u run.py \
   --gpu 0 \
   --cosine \
   --tmax 10 \
-  # --mix_embeds \
+  --mix_embeds \
   --drop_last
 
 # testing the model on all forecast lengths
@@ -51,7 +51,7 @@ python -u run.py \
   --gpu 0 \
   --cosine \
   --tmax 10 \
-  # --mix_embeds \
+  --mix_embeds \
   --drop_last \
   --test_dir long_term_forecast_ETTh1_672_96_AutoTimes_Llama_ETTh1_sl672_ll576_tl96_lr0.0005_bt256_wd0_hd256_hl0_cosTrue_mixTrue_test_0
 done
