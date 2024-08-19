@@ -1,18 +1,24 @@
 # AutoTimes (Large Language Models for Time Series Forecasting)
 
-<p align="center">
-<img src="./figures/illustration.png"  alt="" align=center />
-</p>
-
 The repo is the official implementation: [AutoTimes: Autoregressive Time Series Forecasters via Large Language Models](https://arxiv.org/abs/2402.02370).
 
 > **[Time Series Forecasting](./scripts/time_series_forecasting/)**: AutoTimes repurpose LLMs as autoregressive multivariate time series forecasters. Different from previous models, our repurposed forecaster can be applied on various lookback/forecast lengths.
 
-> **[Zero-shot Forecasting](./scripts/zero_shot_forecasting/)**: AutoTimes takes advantage of LLM's general-purposed token transition as the future extrapolation of time series, demonstrating good performance without downstream samples.
+> **[Zero-Shot Forecasting](./scripts/zero_shot_forecasting/)**: AutoTimes takes advantage of LLM's general-purposed token transition as the future extrapolation of time series, demonstrating good performance without downstream samples.
 
-> **[In-context Forecasting](./scripts/in_context_forecasting/)**: We propose in-context forecasting for the first time, where time series prompts can further incorporated into the context to enhance forecasting.
+> **[In-Context Forecasting](./scripts/in_context_forecasting/)**: We propose in-context forecasting for the first time, where time series prompts can further incorporated into the context to enhance forecasting.
 
-> **[Easy-to-use](scripts/method_generality)**: AutoTimes is compatiable with any decoder-only large language models, demonstrating generality and proper scaling behavior.
+> **[Easy-to-Use](scripts/method_generality)**: AutoTimes is compatiable with any decoder-only large language models, demonstrating generality and proper scaling behavior.
+
+## Updates
+
+News  (2024.08):  We noticed that the [recent work](https://arxiv.org/abs/2406.16964) [(code)](https://github.com/bennytmt/ts_models) has raised questions about non-autoregressive LLM4TS methods. It is also the main claim of our paper that the inconsistent model structure and generative approach will cause insufficient utilization of LLMs for forecasting. We thoroughly conduct all types of ablations [here](./figures/ablation_llm.png).
+
+It highlights AutoTimes can truly utilize the LLM. The core difference: instead of regarding LLMs as representation extractors in a BERT-style, **the general-purpose token transition is more transferable among time series and natural language**, such that the generation ability of LLMs can be fully revitalized.
+
+<p align="center">
+<img src="./figures/illustration.png"  alt="" align=center />
+</p>
 
 # Updates
 
