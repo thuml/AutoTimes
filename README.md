@@ -157,23 +157,7 @@ Not only does AutoTime achieve more acurate predcitions but its training and rea
 <img src="./figures/adaption_efficiency.png"  alt="" align=center />
 </p>
 
-## Textual Timestamps as Position Embedding
-
-We conduct ablations our position embedding of textual timestamps. The performance is consistently promoted because of the positional alignment of multivariate time series.
-
-<p align="center">
-<img src="./figures/ablation.png" alt="" align=center />
-</p>
-
-## Flexible Input Length
-
-In the conventional paradigm, deep forecasters are trained respectively, limiting their versatility. In contrast, our forecasters handle various input lengths with one model.
-
-<p align="center">
-<img src="./figures/lookback.png" alt="" align=center />
-</p>
-
-## Low-rank Adaption
+## Low-Rank Adaption
 
 By incorporating [LoRA](https://arxiv.org/abs/2106.09685), the token transition of LLMs can be better aligned to the time series modality with improved performance.
 
