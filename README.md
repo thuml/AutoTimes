@@ -12,15 +12,13 @@ The repo is the official implementation: [AutoTimes: Autoregressive Time Series 
 
 ## Updates
 
-News  (2024.08):  We noticed that the [recent work](https://arxiv.org/abs/2406.16964) [(code)](https://github.com/bennytmt/ts_models) has raised questions about non-autoregressive LLM4TS methods. It is also the main claim of our paper that the inconsistent model structure and generative approach will cause insufficient utilization of LLMs for forecasting. We thoroughly conduct all types of ablations [here](./figures/ablation_llm.png).
+:triangular_flag_on_post:  News  (2024.08):  We noticed that the [recent work](https://arxiv.org/abs/2406.16964) [(code)](https://github.com/bennytmt/ts_models) has raised questions about non-autoregressive LLM4TS methods. It is also the main claim of our paper that the inconsistent model structure and generative approach will cause insufficient utilization of LLMs for forecasting. We thoroughly conduct all types of ablations [here](./figures/ablation_llm.png).
 
 It highlights AutoTimes can truly utilize the LLM. The core difference: instead of regarding LLMs as representation extractors in a BERT-style, **the general-purpose token transition is more transferable among time series and natural language**, such that the generation ability of LLMs can be fully revitalized.
 
 <p align="center">
 <img src="./figures/illustration.png"  alt="" align=center />
 </p>
-
-# Updates
 
 :triangular_flag_on_post: **News** (2024.5) We received lots of valuable suggestions. [A revised version](https://arxiv.org/pdf/2402.02370) (**22 Pages**) is now available, including elaboratedly described methodolgy, training costs, low-rank adaptation of our method.
  
