@@ -200,4 +200,4 @@ We appreciate the following GitHub repos a lot for their valuable code and effor
 
 If you have any questions or want to use the code, feel free to contact:
 * Yong Liu (liuyong21@mails.tsinghua.edu.cn)
-* Guo Qin (qing20@mails.tsinghua.edu.cn)
+* Guo Qin (qinguo24@mails.tsinghua.edu.cn)
