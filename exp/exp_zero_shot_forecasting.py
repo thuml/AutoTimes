@@ -114,9 +114,9 @@ class Exp_Zero_Shot_Forecast(Exp_Basic):
 
             print("Epoch: {} cost time: {}".format(epoch + 1, time.time() - epoch_time))
             train_loss = np.average(train_loss)
-            vali_loss = self.vali(vali_data, vali_loader, criterion)
-            test_loss = self.vali2(test_data, test_loader, criterion)
-            test_loss2 = self.vali2(test_data2, test_loader2, criterion)
+            vali_loss = self.vali(vali_data, vali_loader, criterion)  
+            test_loss = self.vali2(test_data, test_loader, criterion)    # test_loss indicates the result on the source datasets, 
+            test_loss2 = self.vali2(test_data2, test_loader2, criterion) # test_loss2 indicates the result on the taregt datasets. The latter is what we concerned in zero-shot forecasting​.
             print("Epoch: {0}, Steps: {1} | Train Loss: {2:.7f} Vali Loss: {3:.7f} Test Loss: {4:.7f} Test Loss2: {5:.7f}".format(
                 epoch + 1, train_steps, train_loss, vali_loss, test_loss, test_loss2))
             early_stopping(vali_loss, self.model, path)
