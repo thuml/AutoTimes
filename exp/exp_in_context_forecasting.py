@@ -131,10 +131,10 @@ class Exp_In_Context_Forecast(Exp_Basic):
 
             print("Epoch: {} cost time: {}".format(epoch + 1, time.time() - epoch_time))
             train_loss = np.average(train_loss)
-            vali_loss = self.vali(train_loader, vali_loader, criterion)
+            vali_loss = self.vali(train_loader, vali_loader, criterion) # test_loss indicates the result on the source datasets
             test_loss = vali_loss
-            test_loss2 = self.vali2(test_data2, test_loader2, zero_shot_smape_loss())
-            test_loss3 = self.vali2(test_data3, test_loader3, zero_shot_smape_loss())
+            test_loss2 = self.vali2(test_data2, test_loader2, zero_shot_smape_loss())  # test_loss2 indicates the result on the target datasets
+            test_loss3 = self.vali2(test_data3, test_loader3, zero_shot_smape_loss())  # test_loss3 indicates the result on the target datasets with time series prompts
             print("Epoch: {0}, Steps: {1} | Train Loss: {2:.7f} Vali Loss: {3:.7f} Zero Shot Test Loss: {4:.7f} In Context Test Loss: {5:.7f}".format(
                 epoch + 1, train_steps, train_loss, vali_loss, test_loss2, test_loss3))
             early_stopping(vali_loss, self.model, path)
