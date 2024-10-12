@@ -6,21 +6,21 @@ The repo is the official implementation: [AutoTimes: Autoregressive Time Series 
 
 > **[Zero-Shot Forecasting](./scripts/zero_shot_forecasting/)**: AutoTimes takes advantage of LLM's general-purposed token transition as the future extrapolation of time series, demonstrating good performance without downstream samples.
 
-> **[In-Context Forecasting](./scripts/in_context_forecasting/)**: We propose in-context forecasting for the first time, where time series prompts can further incorporated into the context to enhance forecasting.
+> **[In-Context Forecasting](./scripts/in_context_forecasting/)**: We propose in-context forecasting [for the first time](https://arxiv.org/abs/2402.02370v1), where time series prompts can further incorporated into the context to enhance forecasting.
 
 > **[Easy-to-Use](scripts/method_generality)**: AutoTimes is compatiable with any decoder-only large language models, demonstrating generality and proper scaling behavior.
 
 ## Updates
 
-:triangular_flag_on_post:  News  (2024.08):  We noticed that the [recent work](https://arxiv.org/abs/2406.16964) [(code)](https://github.com/bennytmt/ts_models) has raised questions about LLM4TS methods. We thoroughly conduct ablations [here](./figures/ablation_llm.png), which highlights AutoTimes can truly utilize the LLM. Instead of regarding LLMs as representation extractors in a BERT-style, **the general-purpose token transition is transferable among time series and natural language**, such that the generation ability of LLMs can be fully revitalized.
+:triangular_flag_on_post:  News  (2024.10): AutoTimes has been accepted by **NeurIPS 2024**. [A revised version](https://arxiv.org/pdf/2402.02370) (**25 Pages**) is now available, including prompt engineering of in-context forecasting, adaptation cost evaluations, textual embeddings of metadata, and low-rank adaptation techique.
+
+:triangular_flag_on_post:  News  (2024.08): [Recent work](https://arxiv.org/abs/2406.16964) [(code)](https://github.com/bennytmt/ts_models) has also raised questions about previous non-autoregressive LLM4TS methods. We conduct ablations [here](./figures/ablation_llm.png), highlighting AutoTimes can truly utilize large language models. Instead of adopting LLMs in a BERT-style, **the general-purpose token transition is transferable among time series and natural language**.
 
 <p align="center">
 <img src="./figures/illustration.png"  alt="" align=center />
 </p>
-
-:triangular_flag_on_post: **News** (2024.5) We received lots of valuable suggestions. [A revised version](https://arxiv.org/pdf/2402.02370) (**22 Pages**) is now available, including elaboratedly described methodolgy, training costs, low-rank adaptation of our method.
  
-:triangular_flag_on_post: **News** (2024.2) Scripts for the above tasks in our [paper](https://arxiv.org/pdf/2402.02370.pdf) are available in this repo.
+:triangular_flag_on_post: **News** (2024.2) Scripts for the above tasks in our [paper](https://arxiv.org/pdf/2402.02370.pdf) are all available.
 
 ## Introduction
 
@@ -93,7 +93,7 @@ bash ./scripts/method_generality/opt.sh
 
 > Due to the simple tokenization and the frozen of LLM blocks, AutoTimes is highly compatiable with LLMs. For example, it requires only **15min** for AutoTime to repurpuse LLaMA-7B on ETTh1 on one single RTX 3090-24G.
 
-### A Simple Example
+### A Usage Example
 See ```predict.ipynb``` for a simple training and inference workflow.
 
 ## Overall Approach
@@ -112,7 +112,7 @@ See ```predict.ipynb``` for a simple training and inference workflow.
 <img src="./figures/comparison.png"  alt="" align=center />
 </p>
 
-|            | Non-autoregressive                                           | Autoregressive                                               |
+|            | Non-Autoregressive                                           | Autoregressive                                               |
 | -------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
 | Training             | Trained with specific lookback-forecast lengths              | Trained with the context length with **each generated token being supervised** |
 | One-step Forecasting | Applicable only on fixed lookback-forecast lengths           | Flexible on scenarios **less than the context length** like large language models |
@@ -120,7 +120,7 @@ See ```predict.ipynb``` for a simple training and inference workflow.
 
 ## Time Series Forecasting
 
-Towards the vertility of foundation models, we establish a novel **one-for-all** benchmark: a single forecaster is trained on one dataset and subsequently utilized for all prediction lengths, where we achieve SOTA results in **80%** datasets. In the conventional **one-for-one** scenario, AutoTimes still achieved state-of-the-art performance in **70%** of settings.
+Towards the vertility of foundation models, we establish a novel **one-for-all** benchmark: a single forecaster is trained on one dataset and subsequently utilized for all prediction lengths.
 
 
 <p align="center">
@@ -135,9 +135,15 @@ We evaluate the performance under the transfer learning scenario, where the fore
 <img src="./figures/zeroshot_results.png" alt="" align=center />
 </p>
 
-## In-context Forecasting
+## In-Context Forecasting
 
-Benefiting from time series prompts from the target domain, LLM-based forecaster can achieves consistent promotions on all M3 subsets and the averaged **13.3%** SMAPE reduction compared with zero-shot forecasting.
+We concatenate time series prompts with lookback series and feed them as the context of the forecaster, termed **in-context forecasting**.
+
+<p align="center">
+<img src="./figures/formulation.png" alt="" align=center />
+</p>
+
+Benefiting from time series prompts from the target domain, AUTOTIMES achieves consistent promotions (averaged **13.3%** SMAPE reduction) compared with zero-shot forecasting.
 
 <p align="center">
 <img src="./figures/in-context.png" alt="" align=center />
@@ -148,33 +154,26 @@ Benefiting from time series prompts from the target domain, LLM-based forecaster
 We evaluate the generality and efficiency on other LLMs, demonstrating improved performance with the increase of parameters that **validates the scaling law**.
 
 <p align="center">
-<img src="./figures/alternative_llms.png" alt="" height = "300" align=center />
+<img src="./figures/param.png" alt="" height = "300" align=center />
 </p>
 
 ## Method Efficiency
 
-Not only does AutoTime achieve more acurate predcitions but its training and reasoning time is also greatly reduced, bringing over 5× speedup on average.
+Not only does AutoTime achieve more acurate predcitions but its training and reasoning time is also greatly reduced, bringing over **5× speedup** on average.
 
 <p align="center">
 <img src="./figures/adaption_efficiency.png"  alt="" align=center />
 </p>
 
-## Low-Rank Adaption
-
-By incorporating [LoRA](https://arxiv.org/abs/2106.09685), the token transition of LLMs can be better aligned to the time series modality with improved performance.
-
-<p align="center">
-<img src="./figures/lora.png" alt="" align=center />
-</p>
-
 ## Showcases
-
-<p align="center">
-<img src="./figures/showcases_more.png" alt="" align=center />
-</p>
+We investigate different prompt retrieval strategies. Insightful results are provided to reveal the influence of using time series prompts for interactive prediction.
 
 <p align="center">
 <img src="./figures/showcases.png" alt="" align=center />
+</p>
+
+<p align="center">
+<img src="./figures/subway_icf.png" alt="" align=center />
 </p>
 
 ## Citation
