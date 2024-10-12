@@ -14,7 +14,7 @@ The repo is the official implementation: [AutoTimes: Autoregressive Time Series 
 
 :triangular_flag_on_post:  News  (2024.10): AutoTimes has been accepted by **NeurIPS 2024**. [A revised version](https://arxiv.org/pdf/2402.02370) (**25 Pages**) is now available, including prompt engineering of in-context forecasting, adaptation cost evaluations, textual embeddings of metadata, and low-rank adaptation techique.
 
-:triangular_flag_on_post:  News  (2024.08): [Recent work](https://arxiv.org/abs/2406.16964) [(code)](https://github.com/bennytmt/ts_models) has also raised questions about previous non-autoregressive LLM4TS methods. We conduct ablations [here](./figures/ablation_llm.png), highlighting AutoTimes can truly utilize large language models. Instead of adopting LLMs in a BERT-style, **the general-purpose token transition is transferable among time series and natural language**.
+:triangular_flag_on_post:  News  (2024.08): [Recent work](https://arxiv.org/abs/2406.16964) [(code)](https://github.com/bennytmt/ts_models) has also raised questions about previous non-autoregressive LLM4TS methods. We conduct ablations [here](./figures/ablation_llm.png), highlighting AutoTimes can truly utilize LLMs. Instead of adopting LLMs in a BERT-style, **the general-purpose token transition is transferable among time series and natural language**.
 
 <p align="center">
 <img src="./figures/illustration.png"  alt="" align=center />
