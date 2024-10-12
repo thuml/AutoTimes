@@ -127,7 +127,7 @@ Towards the vertility of foundation models, we establish a novel **one-for-all**
 <img src="./figures/one-for-all_results.png" alt="" align=center />
 </p>
 
-## Zero-shot Forecasting
+## Zero-Shot Forecasting
 
 We evaluate the performance under the transfer learning scenario, where the forecaster is first trained on a source domain and then evaluated on the unseen target domain.
 
