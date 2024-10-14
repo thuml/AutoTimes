@@ -120,7 +120,7 @@ See ```predict.ipynb``` for a simple training and inference workflow.
 
 ## Time Series Forecasting
 
-Towards the vertility of foundation models, we establish a novel **one-for-all** benchmark: a single forecaster is trained on one dataset and subsequently utilized for all prediction lengths.
+Towards the versatility of foundation models, we establish a novel **one-for-all** benchmark: a single forecaster is trained on one dataset and subsequently utilized for all prediction lengths.
 
 
 <p align="center">
