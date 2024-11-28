@@ -249,7 +249,7 @@ class Exp_Long_Term_Forecast(Exp_Basic):
                     pred_y.append(outputs[:, -self.args.token_len:, :])
                 pred_y = torch.cat(pred_y, dim=1)
                 if dis != 0:
-                    pred_y = pred_y[:, :-dis, :]
+                    pred_y = pred_y[:, :-(self.args.token_len - dis), :]
                 batch_y = batch_y[:, -self.args.test_pred_len:, :].to(self.device)
                 outputs = pred_y.detach().cpu()
                 batch_y = batch_y.detach().cpu()
