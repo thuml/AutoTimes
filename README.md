@@ -10,7 +10,7 @@ Official implementation: [AutoTimes: Autoregressive Time Series Forecasters via 
 
 > **[Zero-Shot Forecasting](./scripts/zero_shot_forecasting/)**: AutoTimes takes advantage of LLM's general-purposed token transition as the future extrapolation of time series, demonstrating good performance without downstream samples.
 
-> **[In-Context Forecasting](./scripts/in_context_forecasting/)**: We propose in-context forecasting [for the first time](https://arxiv.org/abs/2402.02370v1), where time series prompts can be incorporated into the input context to enhance forecasting.
+> **[In-Context Forecasting](./scripts/in_context_forecasting/)**: We propose in-context forecasting for the first time, where time series prompts can be incorporated into the input context to enhance forecasting.
 
 > **[Easy-to-Use](scripts/method_generality)**: AutoTimes is compatiable with any decoder-only large language models, demonstrating generality and proper scaling behavior.
 
