@@ -101,68 +101,35 @@ See ```predict.ipynb``` for a simple training and inference workflow.
 
 ## Overall Approach
 
-* Time series and corresponding timestamps are segmented.
-* Textual timestamps are converted into the position embedding of segments.
-* AutoTimes learns to embed time series segments by next token prediction, where intermediate layers of LLM are frozen.
-
 <p align="center">
 <img src="./figures/method.png" alt="" align=center />
 </p>
 
-## Capability
+## Comparison
 
 <p align="center">
 <img src="./figures/comparison.png"  alt="" align=center />
 </p>
 
-|            | Non-Autoregressive                                           | Autoregressive                                               |
-| -------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
-| Training             | Trained with specific lookback-forecast lengths              | Trained with the context length with **each generated token being supervised** |
-| One-step Forecasting | Applicable only on fixed lookback-forecast lengths           | Flexible on scenarios **less than the context length** like large language models |
-| Rolling Forecasting  | Has to drop the lookback series because of the fixed input length | **Can prolong the lookback horizon** until the total length exceeds the context length |
 
 ## Time Series Forecasting
 
-Towards the versatility of foundation models, we establish a novel **one-for-all** benchmark: a single forecaster is trained on one dataset and subsequently utilized for all prediction lengths.
+**One-for-all** benchmark: a single forecaster is trained on one dataset and subsequently used for all prediction lengths.
 
 
 <p align="center">
 <img src="./figures/one-for-all_results.png" alt="" align=center />
 </p>
 
-## Zero-Shot Forecasting
-
-We evaluate the performance under the transfer learning scenario, where the forecaster is first trained on a source domain and then evaluated on the unseen target domain.
-
-<p align="center">
-<img src="./figures/zeroshot_results.png" alt="" align=center />
-</p>
-
 ## In-Context Forecasting
 
-We concatenate time series prompts with lookback series and feed them as the context of the forecaster, termed **in-context forecasting**.
-
 <p align="center">
-<img src="./figures/formulation.png" alt="" align=center />
+<img src="./figures/formulation.png" height = "100" alt="" align=center />
 </p>
 
-Benefiting from time series prompts from the target domain, AUTOTIMES achieves consistent promotions (averaged **13.3%** SMAPE reduction) compared with zero-shot forecasting.
-
-<p align="center">
-<img src="./figures/in-context.png" alt="" align=center />
-</p>
-
-## Model Generality
-
-We evaluate the generality and efficiency on other LLMs, demonstrating improved performance with the increase of parameters that **validates the scaling law**.
-
-<p align="center">
-<img src="./figures/param.png" alt="" height = "300" align=center />
-</p>
+Benefiting from time series prompts from the target domain, AutoTimes achieves averaged **13.3%** SMAPE reduction compared with zero-shot forecasting.
 
 ## Method Efficiency
-
-Not only does AutoTime achieve more acurate predcitions but its training and reasoning time is also greatly reduced, bringing over **5× speedup** on average.
 
 <p align="center">
 <img src="./figures/adaption_efficiency.png"  alt="" align=center />
