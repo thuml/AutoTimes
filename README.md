@@ -124,7 +124,7 @@ See ```predict.ipynb``` for a simple training and inference workflow.
 ## In-Context Forecasting
 
 <p align="center">
-<img src="./figures/formulation.png" height = "100" alt="" align=center />
+<img src="./figures/formulation.png" height = "150" alt="" align=center />
 </p>
 
 Benefiting from time series prompts from the target domain, AutoTimes achieves averaged **13.3%** SMAPE reduction compared with zero-shot forecasting.
