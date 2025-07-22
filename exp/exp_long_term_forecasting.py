@@ -141,12 +141,12 @@ class Exp_Long_Term_Forecast(Exp_Basic):
                     with torch.cuda.amp.autocast():
                         outputs = self.model(batch_x, batch_x_mark, None, batch_y_mark)
                         loss = criterion(outputs, batch_y)                        
-                        loss_val += loss
+                        loss_val += loss.item()
                         count += 1
                 else:
                     outputs = self.model(batch_x, batch_x_mark, None, batch_y_mark)
                     loss = criterion(outputs, batch_y)
-                    loss_val += loss
+                    loss_val += loss.item()
                     count += 1
                 
                 if (i + 1) % 100 == 0:
